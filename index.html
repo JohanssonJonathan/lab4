@@ -14,9 +14,7 @@
       let btn = document.getElementById("key"); //HÄMTA GET KEY KNAPPEN
       let output = document.getElementById("output")
       let inputKey = document.getElementById("keyin");
-      let key = inputKey.value;
 
-  console.log(key)
 
       btn.addEventListener("click", function(e){ // KLICKA PÅ KNAPP GET KEY
 
@@ -25,8 +23,7 @@
               if(ajaxKey.readyState === 4){
 
               let json = JSON.parse(ajaxKey.responseText);
-              console.log(key)
-              key = json.key
+              inputKey.value = json.key
             }
           }
 
