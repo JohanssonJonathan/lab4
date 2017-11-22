@@ -13,14 +13,21 @@
 
       let btn = document.getElementById("key"); //HÄMTA GET KEY KNAPPEN
       let output = document.getElementById("output")
+      let inputKey = document.getElementById("keyin");
+      let key = inputKey.value;
+
+  console.log(key)
 
       btn.addEventListener("click", function(e){ // KLICKA PÅ KNAPP GET KEY
 
           ajaxKey.onreadystatechange = function(){
 
-              if(ajaxKey.readyState === 4)
-              output.innerHTML = ajaxKey.responseText;
+              if(ajaxKey.readyState === 4){
 
+              let json = JSON.parse(ajaxKey.responseText);
+              console.log(key)
+              key = json.key
+            }
           }
 
           ajaxKey.open("get", "https://www.forverkliga.se/JavaScript/api/crud.php?requestKey")
@@ -42,7 +49,7 @@
 <body>
 
   <button id="key">Get Key</button>
-
+  <input type="text" placeholder="key" name="" id="keyin">
   <div id="output"></div>
 
 
