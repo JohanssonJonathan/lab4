@@ -1,0 +1,51 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>LAB 4 Robin o Jonathan</title>
+
+  <script>
+
+    window.addEventListener("load",function(){
+
+      let ajaxKey = new XMLHttpRequest(); // NEW AJAX REQUEST
+
+      let btn = document.getElementById("key"); //HÄMTA GET KEY KNAPPEN
+      let output = document.getElementById("output")
+
+      btn.addEventListener("click", function(e){ // KLICKA PÅ KNAPP GET KEY
+
+          ajaxKey.onreadystatechange = function(){
+
+              if(ajaxKey.readyState === 4)
+              output.innerHTML = ajaxKey.responseText;
+
+          }
+
+          ajaxKey.open("get", "https://www.forverkliga.se/JavaScript/api/crud.php?requestKey")
+          ajaxKey.send()
+      });
+
+
+
+
+
+
+    });
+  </script>
+
+  <style>
+
+  </style>
+</head>
+<body>
+
+  <button id="key">Get Key</button>
+
+  <div id="output"></div>
+
+
+
+</body>
+</html>
