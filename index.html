@@ -1,91 +1,114 @@
 <html>
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>LAB 4 Robin o Jonathan</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>LAB 4 Robin o Jonathan</title>
 
-  <script>
+    <script>
+        window.addEventListener("load", function() {
 
-    window.addEventListener("load",function(){
+            let ajaxKey = new XMLHttpRequest(); // NEW AJAX REQUEST
 
-      let ajaxKey = new XMLHttpRequest(); // NEW AJAX REQUEST
+            let btn = document.getElementById("key"); //HÄMTA GET KEY KNAPPEN
 
-      let btn = document.getElementById("key"); //HÄMTA GET KEY KNAPPEN
-      let output = document.getElementById("output")
-      let inputKey = document.getElementById("keyin");
+            let output = document.getElementById("output")
+            let inputKey = document.getElementById("keyin");
 
+            //Lägga till bok
+            let ajaxAdd = new XMLHttpRequest(); // NEW AJAX REQUEST (EJ NÖDVÄNDIG)
+            let addBook = document.getElementById("addBook");
+            let title = document.getElementById("title");
+            let author = document.getElementById("author");
+            let addBookStatus = document.getElementById("addBookStatus");
 
-      btn.addEventListener("click", function(e){ // KLICKA PÅ KNAPP GET KEY
+            addBook.addEventListener("click", function() {
+                ajaxAdd.onreadystatechange = function() {
+                    if (ajaxAdd.readyState === 4) {
+                        let json = JSON.parse(ajaxAdd.responseText);
+                        console.log(json)
+                        console.log(ajaxAdd.id);
+                        console.log(ajaxAdd.status);
+                        console.log(inputKey.value)
+                        console.log(title.value)
+                        console.log(author.value)
 
-          ajaxKey.onreadystatechange = function(){
+                        addBookStatus.innerHTML = `Status: ${json.status}<br>
+                    Book ID: ${json.id}`
+                    }
+                };
+                ajaxAdd.open("get", `https://www.forverkliga.se/JavaScript/api/crud.php?op=insert&key=${inputKey.value}&title=${title.value}&author=${author.valu}`)
+                ajaxAdd.send();
+            });
 
-              if(ajaxKey.readyState === 4){
+            btn.addEventListener("click", function(e) { // KLICKA PÅ KNAPP GET KEY
 
-              let json = JSON.parse(ajaxKey.responseText);
-              inputKey.value = json.key
-            }
-          }
+                ajaxKey.onreadystatechange = function() {
 
-          ajaxKey.open("get", "https://www.forverkliga.se/JavaScript/api/crud.php?requestKey")
-          ajaxKey.send()
-      });
+                    if (ajaxKey.readyState === 4) {
 
+                        let json = JSON.parse(ajaxKey.responseText);
+                        inputKey.value = json.key
+                    }
+                }
 
+                ajaxKey.open("get", "https://www.forverkliga.se/JavaScript/api/crud.php?requestKey")
+                ajaxKey.send()
+            });
+        });
 
+    </script>
 
+    <style>
+        body {}
 
+        button {
+            padding: 10px;
+            color: white;
+            margin: 10px;
+            box-shadow: 5px 5px 10px;
+            background: #b95c69;
+        }
 
-    });
-  </script>
+        input {
+            padding: 5px;
+            font-family: arial;
+            margin: 5px;
+        }
 
-  <style>
+        ul {
+            background: rgb(159, 159, 159);
+            width: 200px;
+            height: 100px;
+            box-shadow: 2px 2px 5px black;
+        }
 
-  body{
-  }
-    button {
-      padding:10px;
-      color:white;
-      margin:10px;
-      box-shadow: 5px 5px 10px;
-background:#b95c69;
-   }
-
-     input{
-       padding:5px;
-       font-family: arial;
-       margin:5px;
-     }
-
-     ul{
-       background:rgb(159, 159, 159);
-       width:200px;
-       height: 100px;
-       box-shadow: 2px 2px 5px black;
-     }
-  </style>
+    </style>
 </head>
+
 <body>
 
-  <button id="key">Get Key</button>
-  <br>
-  <input type="text" placeholder="Key" name="" id="keyin"> <br>
-  <input type="text" placeholder="Title" name="" id="title"><br>
-  <input type="text" placeholder="Author" name="" id="author"><br>
+    <button id="key">Get Key</button>
+    <br>
+    <input type="text" placeholder="Key" name="" id="keyin"> <br>
+    <input type="text" placeholder="Title" name="" id="title"><br>
+    <input type="text" placeholder="Author" name="" id="author"><br>
 
-  <button id="addBook">Add Book</button>
+    <button id="addBook">Add Book</button>
+<div id="addBookStatus"></div>
+    <ul>
+    </ul>
 
-  <ul>
-  </ul>
+    <button id="changeBook">Change Book</button><br>
+    <input type="text" placeholder="Id" name="" id="id"> <br>
+    <input type="text" placeholder="Title" name="" id="title"><br>
+    <input type="text" placeholder="Author" name="" id="author"><br>
 
-  <button id="changeBook">Change Book</button><br>
-  <input type="text" placeholder="Id" name="" id="id"> <br>
-  <input type="text" placeholder="Title" name="" id="title"><br>
-  <input type="text" placeholder="Author" name="" id="author"><br>
-
-  <button id="changeBook">Delete Book</button><br>
+    <button id="changeBook">Delete Book</button><br>
     <input type="text" placeholder="Delete Id" id="deleteId">
 
 
 </body>
+
 </html>
