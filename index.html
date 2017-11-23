@@ -23,6 +23,11 @@
             let author = document.getElementById("author");
             let addBookStatus = document.getElementById("addBookStatus");
 
+            //Kolla på böcker
+            let viewBooks = document.getElementById("viewBooks");
+            let ulList = document.getElementsByTagName("ul");
+
+
             addBook.addEventListener("click", function() {
                 ajaxAdd.onreadystatechange = function() {
                     if (ajaxAdd.readyState === 4) {
@@ -38,21 +43,41 @@
                     Book ID: ${json.id}`
                     }
                 };
-                ajaxAdd.open("get", `https://www.forverkliga.se/JavaScript/api/crud.php?op=insert&key=${inputKey.value}&title=${title.value}&author=${author.valu}`)
+                ajaxAdd.open("get", `https://www.forverkliga.se/JavaScript/api/crud.php?op=insert&key=${inputKey.value}&title=${title.value}&author=${author.value}`)
                 ajaxAdd.send();
             });
 
+            //KOLLA LISTAN - TWEAK NEEDED!! klickar man två gånger ska samma lista komma upp
+            viewBooks.addEventListener("click", function() {
+                ajaxAdd.onreadystatechange = function() {
+                    if (ajaxAdd.readyState === 4) {
+                        let json = JSON.parse(ajaxAdd.responseText);
+                        console.log(json);
+
+                        for (let i = 0; i < json.data.length; i++) {
+                            console.log(json.data[i]);
+                            let addLi = document.createElement("li");
+                            addLi.innerHTML += `Author: <strong>${json.data[i].author}</strong><br>`;
+                            addLi.innerHTML += `Title: <strong>${json.data[i].title}</strong><br>`;
+                            addLi.innerHTML += `Last Update: <strong>${json.data[i].updated}</strong><br>`;
+                            ulList[0].appendChild(addLi);
+                        }
+
+                    }
+
+                }
+                ajaxAdd.open("get", `https://www.forverkliga.se/JavaScript/api/crud.php?op=select&key=${inputKey.value}`)
+                ajaxAdd.send()
+            });
+
+
             btn.addEventListener("click", function(e) { // KLICKA PÅ KNAPP GET KEY
-
                 ajaxKey.onreadystatechange = function() {
-
                     if (ajaxKey.readyState === 4) {
-
                         let json = JSON.parse(ajaxKey.responseText);
                         inputKey.value = json.key
                     }
                 }
-
                 ajaxKey.open("get", "https://www.forverkliga.se/JavaScript/api/crud.php?requestKey")
                 ajaxKey.send()
             });
@@ -79,8 +104,8 @@
 
         ul {
             background: rgb(159, 159, 159);
-            width: 200px;
-            height: 100px;
+            width: 250px;
+            height: 300px;
             box-shadow: 2px 2px 5px black;
         }
 
@@ -96,10 +121,12 @@
     <input type="text" placeholder="Author" name="" id="author"><br>
 
     <button id="addBook">Add Book</button>
-<div id="addBookStatus"></div>
+    <div id="addBookStatus"></div>
+
     <ul>
     </ul>
 
+    <button id="viewBooks">View Books</button>
     <button id="changeBook">Change Book</button><br>
     <input type="text" placeholder="Id" name="" id="id"> <br>
     <input type="text" placeholder="Title" name="" id="title"><br>
