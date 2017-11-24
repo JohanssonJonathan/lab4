@@ -51,9 +51,8 @@
                         console.log(inputKey.value)
                         console.log(title.value)
                         console.log(author.value)
-
-                        addBookStatus.innerHTML = `Status: ${json.status}<br>
-                    Book ID: ${json.id}`
+                        addBookStatus.innerHTML = `Status: $<strong>{json.status}</strong><br>
+                    Book ID: <strong>${json.id}< /strong>`
                     }
                 };
                 ajaxAdd.open("get", `https://www.forverkliga.se/JavaScript/api/crud.php?op=insert&key=${inputKey.value}&title=${title.value}&author=${author.value}`)
@@ -66,25 +65,29 @@
             viewBooks.addEventListener("click", function(e) {
 
                 ajaxAdd.onreadystatechange = function() {
-   ulList[0].innerHTML = "";
+                    ulList[0].innerHTML = "";
                     if (ajaxAdd.readyState === 4) {
                         let json = JSON.parse(ajaxAdd.responseText);
 
-                      objBooks = json;
+                        objBooks = json;
 
 
-                      if(json.data!== undefined){
-                        for(let i=0; i< json.data.length; i++){
+                        if (json.data !== undefined) {
+                            for (let i = 0; i < json.data.length; i++) {
 
-                          let addLi = document.createElement("li");
+                                let addLi = document.createElement("li");
 
-                            addLi.innerHTML += `Title: <strong>${json.data[i].title}</strong><br>`;
-                            addLi.innerHTML += `Author: <strong>${json.data[i].author}</strong><br>`;
-                            addLi.innerHTML += `Book ID: <strong>${json.data[i].id}</strong><br>`;
-                            addLi.innerHTML += `Last Update: <strong>${json.data[i].updated}</strong><br><br>`;
-                            addLi.setAttribute("id", json.data[i].title)
+                                addLi.innerHTML += `Title: <strong>${json.data[i].title}</strong><br>`;
+                                addLi.innerHTML += `Author: <strong>${json.data[i].author}</strong><br>`;
+                                addLi.innerHTML += `Book ID: <strong>${json.data[i].id}</strong><br>`;
+                                addLi.innerHTML += `Last Update: <strong>${json.data[i].updated}</strong><br><br>`;
+                                addLi.setAttribute("id", json.data[i].title)
+                                ulList[0].appendChild(addLi);
+                            }
+                        }else{
+                            let addLi = document.createElement("li");
+                             addLi.innerHTML += `ERROR, TRY AGAIN!`;
                             ulList[0].appendChild(addLi);
-                          }
                         }
                     }
                 }
@@ -112,7 +115,7 @@
                 }
                 ajaxAdd.open("get", `https://www.forverkliga.se/JavaScript/api/crud.php?op=update&key=${inputKey.value}&id=${bookId.value}&title=${titleChange.value}&author=${authorChange.value}`);
                 ajaxAdd.send();
-                    })
+            })
 
 
             /////////////////////////////////////////////////////////////////
@@ -131,36 +134,36 @@
             });
 
             // DELETE Book
-            deleteBook.addEventListener("click",function(event){
+            deleteBook.addEventListener("click", function(event) {
 
 
-              ajaxKey.onreadystatechange = function(){
+                ajaxKey.onreadystatechange = function() {
 
-                if(ajaxKey.readyState === 4){
-                  let json = JSON.parse(ajaxKey.responseText);
+                    if (ajaxKey.readyState === 4) {
+                        let json = JSON.parse(ajaxKey.responseText);
 
-                      //console.log("Delete id value "+deleteId.value);
-                    let idVal = Number(deleteId.value)
+                        //console.log("Delete id value "+deleteId.value);
+                        let idVal = Number(deleteId.value)
 
-                      for(let i=0; i< objBooks.data.length;i++){
+                        for (let i = 0; i < objBooks.data.length; i++) {
 
-                         if(objBooks.data[i].id === idVal ){
-                           let id = document.getElementById(objBooks.data[i].title);
-                           id.remove()
-                            console.log(objBooks.data[i].title)
+                            if (objBooks.data[i].id === idVal) {
+                                let id = document.getElementById(objBooks.data[i].title);
+                                id.remove()
+                                console.log(objBooks.data[i].title)
 
-                           //  console.log(deleteId.value)
+                                //  console.log(deleteId.value)
+                            }
                         }
-                      }
 
-                //   for(let i=0; i< json.data.length; i++ )
-                //   console.log(json.data[i].id)
-                 }
-              }
+                        //   for(let i=0; i< json.data.length; i++ )
+                        //   console.log(json.data[i].id)
+                    }
+                }
 
 
-              ajaxKey.open("get", "https://www.forverkliga.se/JavaScript/api/crud.php?op=delete&key="+inputKey.value+"&id="+deleteId.value)
-              ajaxKey.send()
+                ajaxKey.open("get", "https://www.forverkliga.se/JavaScript/api/crud.php?op=delete&key=" + inputKey.value + "&id=" + deleteId.value)
+                ajaxKey.send()
             });
 
         })
@@ -169,7 +172,7 @@
 
     <style>
         body {
-          font-family: arial;
+            font-family: arial;
         }
 
         button {
@@ -191,8 +194,8 @@
             width: 300px;
             height: 200px;
             box-shadow: 2px 2px 5px black;
-            overflow:scroll;
-            padding:5px;
+            overflow: scroll;
+            padding: 5px;
         }
 
     </style>
