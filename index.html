@@ -106,6 +106,9 @@
                             changeBookStatus.innerHTML = `Status: <strong>${json.status}</strong> <br> Message: <strong>${json.message}</strong>`;
                         }
                     }
+
+
+
                 }
                 ajaxAdd.open("get", `https://www.forverkliga.se/JavaScript/api/crud.php?op=update&key=${inputKey.value}&id=${bookId.value}&title=${titleChange.value}&author=${authorChange.value}`);
                 ajaxAdd.send();
@@ -129,15 +132,6 @@
 
             // DELETE Book
             deleteBook.addEventListener("click",function(event){
-
-            // for(let i=0; i< objBooks.data.length;i++){
-            //    // console.log("Delete id value " +deleteId.value)
-            //    // console.log("Alla böckers id" + objBooks.data[i].id)
-            //    if(objBooks.data[i].id === deleteId.value ){
-            //       console.log("hej")
-            //      //  console.log(deleteId.value)
-            //   }
-            // }
 
 
               ajaxKey.onreadystatechange = function(){
@@ -174,7 +168,9 @@
     </script>
 
     <style>
-        body {}
+        body {
+          font-family: arial;
+        }
 
         button {
             padding: 10px;
@@ -192,10 +188,11 @@
 
         ul {
             background: rgb(159, 159, 159);
-            width: 250px;
-            height: 300px;
+            width: 300px;
+            height: 200px;
             box-shadow: 2px 2px 5px black;
             overflow:scroll;
+            padding:5px;
         }
 
     </style>
