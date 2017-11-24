@@ -62,7 +62,10 @@
 
             let y = 0;
             //KOLLA LISTAN - TWEAK NEEDED!!
+
             viewBooks.addEventListener("click", function(e) {
+
+         
                 //                addLi.innerHTML = "";
                 ajaxAdd.onreadystatechange = function() {
                     if (ajaxAdd.readyState === 4) {
@@ -89,24 +92,25 @@
                 ajaxAdd.send()
             });
 
-
             //////////////////////////////CHANGEBOOK////////////////////////////////////
 
             changeBook.addEventListener("click", function(event) {
+
                 ajaxAdd.onreadystatechange = function() {
                     if (ajaxAdd.readyState === 4) {
                         let json = JSON.parse(ajaxAdd.responseText);
                         console.log(json);
                         if (json.message === undefined) {
-                            changeBookStatus.innerHTML = `Status: ${json.status}`;
+                            changeBookStatus.innerHTML = `Status: <strong>${json.status}</strong>`;
                         } else {
-                            changeBookStatus.innerHTML = `Status: ${json.status} <br> Message: ${json.message}`;
+                            changeBookStatus.innerHTML = `Status: <strong>${json.status}</strong> <br> Message: <strong>${json.message}</strong>`;
                         }
                     }
                 }
                 ajaxAdd.open("get", `https://www.forverkliga.se/JavaScript/api/crud.php?op=update&key=${inputKey.value}&id=${bookId.value}&title=${titleChange.value}&author=${authorChange.value}`);
                 ajaxAdd.send();
-            });
+                    })
+
 
             /////////////////////////////////////////////////////////////////
 
