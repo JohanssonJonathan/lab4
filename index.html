@@ -25,6 +25,7 @@
             let addBookStatus = document.getElementById("addBookStatus");
             //Ändra bok
             let changeBookStatus = document.getElementById("changeBookStatus");
+            let changeBook = document.getElementById("changeBook");
             let bookId = document.getElementById("bookId");
             let authorChange = document.getElementById("authorChange");
             let titleChange = document.getElementById("titleChange");
@@ -59,12 +60,13 @@
                 ajaxAdd.send();
             });
 
-            let y=0;
+
             //KOLLA LISTAN - TWEAK NEEDED!!
 
             viewBooks.addEventListener("click", function(e) {
 
                 ajaxAdd.onreadystatechange = function() {
+   ulList[0].innerHTML = "";
                     if (ajaxAdd.readyState === 4) {
                         let json = JSON.parse(ajaxAdd.responseText);
 
@@ -73,6 +75,7 @@
 
                       if(json.data.length !== undefined){
                         for(let i=0; i< json.data.length; i++){
+
                           let addLi = document.createElement("li");
 
                             addLi.innerHTML += `Title: <strong>${json.data[y].title}</strong><br>`;
@@ -81,15 +84,13 @@
                             addLi.innerHTML += `Last Update: <strong>${json.data[y].updated}</strong><br><br>`;
                             addLi.setAttribute("id", json.data[y].title)
                             ulList[0].appendChild(addLi);
-                            y++
-
                           }
                         }
-
                     }
                 }
                 ajaxAdd.open("get", `https://www.forverkliga.se/JavaScript/api/crud.php?op=select&key=${inputKey.value}`)
                 ajaxAdd.send()
+
             });
 
             //////////////////////////////CHANGEBOOK////////////////////////////////////
