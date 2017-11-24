@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>LAB 4 Robin o Jonathan</title>
+    <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro" rel="stylesheet"> 
 
     <script>
         window.addEventListener("load", function() {
@@ -51,8 +52,8 @@
                         console.log(inputKey.value)
                         console.log(title.value)
                         console.log(author.value)
-                        addBookStatus.innerHTML = `Status: $<strong>{json.status}</strong><br>
-                    Book ID: <strong>${json.id}< /strong>`
+                        addBookStatus.innerHTML = `Status: <strong>${json.status}</strong><br>
+                    Book ID: <strong>${json.id}</strong>`
                     }
                 };
                 ajaxAdd.open("get", `https://www.forverkliga.se/JavaScript/api/crud.php?op=insert&key=${inputKey.value}&title=${title.value}&author=${author.value}`)
@@ -104,7 +105,7 @@
                     if (ajaxAdd.readyState === 4) {
                         let json = JSON.parse(ajaxAdd.responseText);
                         if (json.message === undefined) {
-                            changeBookStatus.innerHTML = `Status: <strong>${json.status}</strong>`;
+                            changeBookStatus.innerHTML = `Status: <strong>${json.status}</strong><br> Message: <strong>It worked!</strong>`;
                         } else {
                             changeBookStatus.innerHTML = `Status: <strong>${json.status}</strong> <br> Message: <strong>${json.message}</strong>`;
                         }
@@ -172,7 +173,7 @@
 
     <style>
         body {
-            font-family: arial;
+            font-family: 'Anonymous Pro', monospace;
         }
 
         button {
@@ -181,11 +182,12 @@
             margin: 10px;
             box-shadow: 5px 5px 10px;
             background: #b95c69;
+            font-family: 'Anonymous Pro', monospace;
         }
 
         input {
             padding: 5px;
-            font-family: arial;
+font-family: 'Anonymous Pro', monospace;
             margin: 5px;
         }
 
@@ -210,21 +212,22 @@
     <input type="text" placeholder="Author" name="" id="author"><br>
 
     <button id="addBook">Add Book</button>
-    <div id="addBookStatus"></div>
+    <div id="addBookStatus">Status: <br>Book ID:</div>
 
     <ul>
     </ul>
 
-    <button id="viewBooks">View Books</button>
-    <button id="changeBook">Change Book</button><br>
+    <button id="viewBooks">View Books</button><br>
+    
     <input type="text" placeholder="Id" name="" id="bookId"> <br>
     <input type="text" placeholder="Title" name="" id="titleChange"><br>
     <input type="text" placeholder="Author" name="" id="authorChange"><br>
-    <div id="changeBookStatus"></div>
+    <button id="changeBook">Change Book</button><br>
+    <div id="changeBookStatus">Status:<br>Message:</div>
 
-    <button id="deleteBook">Delete Book</button><br>
-    <input type="text" placeholder="Delete Id" id="deleteId">
-
+    
+    <input type="text" placeholder="Delete Id" id="deleteId"><br>
+<button id="deleteBook">Delete Book</button><br>
 
 </body>
 
