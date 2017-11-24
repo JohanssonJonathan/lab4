@@ -78,11 +78,11 @@
 
                           let addLi = document.createElement("li");
 
-                            addLi.innerHTML += `Title: <strong>${json.data[y].title}</strong><br>`;
-                            addLi.innerHTML += `Author: <strong>${json.data[y].author}</strong><br>`;
-                            addLi.innerHTML += `Book ID: <strong>${json.data[y].id}</strong><br>`;
-                            addLi.innerHTML += `Last Update: <strong>${json.data[y].updated}</strong><br><br>`;
-                            addLi.setAttribute("id", json.data[y].title)
+                            addLi.innerHTML += `Title: <strong>${json.data[i].title}</strong><br>`;
+                            addLi.innerHTML += `Author: <strong>${json.data[i].author}</strong><br>`;
+                            addLi.innerHTML += `Book ID: <strong>${json.data[i].id}</strong><br>`;
+                            addLi.innerHTML += `Last Update: <strong>${json.data[i].updated}</strong><br><br>`;
+                            addLi.setAttribute("id", json.data[i].title)
                             ulList[0].appendChild(addLi);
                           }
                         }
