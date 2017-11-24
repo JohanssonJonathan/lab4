@@ -1,3 +1,4 @@
+<!--T8T4f-->
 <html>
 
 <head>
@@ -22,7 +23,7 @@
             let title = document.getElementById("title");
             let author = document.getElementById("author");
             let addBookStatus = document.getElementById("addBookStatus");
-            let addLi = document.createElement("li");
+            
             //Kolla på böcker
             let viewBooks = document.getElementById("viewBooks");
             let ulList = document.getElementsByTagName("ul");
@@ -49,13 +50,14 @@
 
             //KOLLA LISTAN - TWEAK NEEDED!! 
             viewBooks.addEventListener("click", function() {
-                addLi.innerHTML = "";
+//                addLi.innerHTML = "";
                 ajaxAdd.onreadystatechange = function() {
                     if (ajaxAdd.readyState === 4) {
                         let json = JSON.parse(ajaxAdd.responseText);
                         console.log(json);
 
                         for (let i = 0; i < json.data.length; i++) {
+                            let addLi = document.createElement("li");
                             console.log(json.data[i]);
                             addLi.innerHTML += `Title: <strong>${json.data[i].title}</strong><br>`;
                             addLi.innerHTML += `Author: <strong>${json.data[i].author}</strong><br>`;
