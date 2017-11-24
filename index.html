@@ -37,6 +37,9 @@
             let ulList = document.getElementsByTagName("ul");
 
 
+
+            let objBooks = ""
+
             addBook.addEventListener("click", function() {
                 ajaxAdd.onreadystatechange = function() {
                     if (ajaxAdd.readyState === 4) {
@@ -64,7 +67,9 @@
                 ajaxAdd.onreadystatechange = function() {
                     if (ajaxAdd.readyState === 4) {
                         let json = JSON.parse(ajaxAdd.responseText);
-                        console.log(json);
+
+                      objBooks = json;
+
 
                       if(json.data.length !== undefined){
                         for(let i=0; i< json.data.length; i++){
@@ -74,6 +79,7 @@
                             addLi.innerHTML += `Author: <strong>${json.data[y].author}</strong><br>`;
                             addLi.innerHTML += `Book ID: <strong>${json.data[y].id}</strong><br>`;
                             addLi.innerHTML += `Last Update: <strong>${json.data[y].updated}</strong><br><br>`;
+                            addLi.setAttribute("id", json.data[y].title)
                             ulList[0].appendChild(addLi);
                             y++
 
@@ -93,7 +99,6 @@
                 ajaxAdd.onreadystatechange = function() {
                     if (ajaxAdd.readyState === 4) {
                         let json = JSON.parse(ajaxAdd.responseText);
-                        console.log(json);
                         if (json.message === undefined) {
                             changeBookStatus.innerHTML = `Status: <strong>${json.status}</strong>`;
                         } else {
@@ -124,14 +129,35 @@
             // DELETE Book
             deleteBook.addEventListener("click",function(event){
 
+            // for(let i=0; i< objBooks.data.length;i++){
+            //    // console.log("Delete id value " +deleteId.value)
+            //    // console.log("Alla böckers id" + objBooks.data[i].id)
+            //    if(objBooks.data[i].id === deleteId.value ){
+            //       console.log("hej")
+            //      //  console.log(deleteId.value)
+            //   }
+            // }
+
 
               ajaxKey.onreadystatechange = function(){
 
                 if(ajaxKey.readyState === 4){
                   let json = JSON.parse(ajaxKey.responseText);
-                  
 
-                console.log(json)
+                      //console.log("Delete id value "+deleteId.value);
+                    let idVal = Number(deleteId.value)
+
+                      for(let i=0; i< objBooks.data.length;i++){
+
+                         if(objBooks.data[i].id === idVal ){
+                           let id = document.getElementById(objBooks.data[i].title);
+                           id.remove()
+                            console.log(objBooks.data[i].title)
+
+                           //  console.log(deleteId.value)
+                        }
+                      }
+
                 //   for(let i=0; i< json.data.length; i++ )
                 //   console.log(json.data[i].id)
                  }
@@ -141,7 +167,6 @@
               ajaxKey.open("get", "https://www.forverkliga.se/JavaScript/api/crud.php?op=delete&key="+inputKey.value+"&id="+deleteId.value)
               ajaxKey.send()
             });
-
 
         })
 
@@ -179,7 +204,7 @@
 
     <button id="key">Get Key</button>
     <br>
-    <input type="text" placeholder="Key" name="" id="keyin"> <br>
+    <input type="text" placeholder="Key" name="" value="T8T4f" id="keyin"> <br>
     <input type="text" placeholder="Title" name="" id="title"><br>
     <input type="text" placeholder="Author" name="" id="author"><br>
 
