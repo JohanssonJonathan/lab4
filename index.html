@@ -23,8 +23,11 @@
             let title = document.getElementById("title");
             let author = document.getElementById("author");
             let addBookStatus = document.getElementById("addBookStatus");
-
-
+            //Ändra bok
+            let changeBookStatus = document.getElementById("changeBookStatus");
+            let bookId = document.getElementById("bookId");
+            let authorChange = document.getElementById("authorChange");
+            let titleChange = document.getElementById("titleChange");
             //Ta bort Book
             let deleteBook = document.getElementById("deleteBook");
             let deleteId = document.getElementById("deleteId");
@@ -57,13 +60,7 @@
             //KOLLA LISTAN - TWEAK NEEDED!!
 
             viewBooks.addEventListener("click", function(e) {
-<<<<<<< HEAD
-//                addLi.innerHTML = "";
-=======
 
-         
-                //                addLi.innerHTML = "";
->>>>>>> b0dc79f09898473043c11e699b264dfb75993bd5
                 ajaxAdd.onreadystatechange = function() {
                     if (ajaxAdd.readyState === 4) {
                         let json = JSON.parse(ajaxAdd.responseText);
@@ -89,8 +86,6 @@
                 ajaxAdd.send()
             });
 
-<<<<<<< HEAD
-=======
             //////////////////////////////CHANGEBOOK////////////////////////////////////
 
             changeBook.addEventListener("click", function(event) {
@@ -113,7 +108,7 @@
 
             /////////////////////////////////////////////////////////////////
 
->>>>>>> b0dc79f09898473043c11e699b264dfb75993bd5
+
 
             btn.addEventListener("click", function(e) { // KLICKA PÅ KNAPP GET KEY
                 ajaxKey.onreadystatechange = function() {
@@ -196,9 +191,10 @@
 
     <button id="viewBooks">View Books</button>
     <button id="changeBook">Change Book</button><br>
-    <input type="text" placeholder="Id" name="" id="id"> <br>
-    <input type="text" placeholder="Title" name="" id="title"><br>
-    <input type="text" placeholder="Author" name="" id="author"><br>
+    <input type="text" placeholder="Id" name="" id="bookId"> <br>
+    <input type="text" placeholder="Title" name="" id="titleChange"><br>
+    <input type="text" placeholder="Author" name="" id="authorChange"><br>
+    <div id="changeBookStatus"></div>
 
     <button id="deleteBook">Delete Book</button><br>
     <input type="text" placeholder="Delete Id" id="deleteId">
