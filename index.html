@@ -24,6 +24,11 @@
             let author = document.getElementById("author");
             let addBookStatus = document.getElementById("addBookStatus");
 
+
+            //Ta bort Book
+            let deleteBook = document.getElementById("deleteBook");
+            let deleteId = document.getElementById("deleteId");
+
             //Kolla på böcker
             let viewBooks = document.getElementById("viewBooks");
             let ulList = document.getElementsByTagName("ul");
@@ -88,7 +93,30 @@
                 ajaxKey.open("get", "https://www.forverkliga.se/JavaScript/api/crud.php?requestKey")
                 ajaxKey.send()
             });
-        });
+
+            // DELETE Book
+            deleteBook.addEventListener("click",function(event){
+
+                console.log(deleteId.value)
+
+              ajaxKey.onreadystatechange = function(){
+
+                if(ajaxKey.readyState === 4){
+                  let json = JSON.parse(ajaxKey.responseText);
+
+                  console.log(json.data[3].id)
+                //   for(let i=0; i< json.data.length; i++ )
+                //   console.log(json.data[i].id)
+                 }
+              }
+
+
+              ajaxKey.open("get", "https://www.forverkliga.se/JavaScript/api/crud.php?op=delete&key="+inputKey.value+"&id="+deleteId.value)
+              ajaxKey.send()
+            });
+
+
+        })
 
     </script>
 
@@ -114,7 +142,7 @@
             width: 250px;
             height: 300px;
             box-shadow: 2px 2px 5px black;
-            overflow: scroll;
+            overflow:scroll;
         }
 
     </style>
@@ -140,7 +168,7 @@
     <input type="text" placeholder="Title" name="" id="title"><br>
     <input type="text" placeholder="Author" name="" id="author"><br>
 
-    <button id="changeBook">Delete Book</button><br>
+    <button id="deleteBook">Delete Book</button><br>
     <input type="text" placeholder="Delete Id" id="deleteId">
 
 
