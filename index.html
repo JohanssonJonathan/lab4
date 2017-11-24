@@ -28,6 +28,13 @@
             let viewBooks = document.getElementById("viewBooks");
             let ulList = document.getElementsByTagName("ul");
 
+            //Ändra bok
+            let changeBook = document.getElementById("changeBook");
+            let bookId = document.getElementById("id");
+            let titleChange = document.getElementById("titleChange");
+            let authorChange = document.getElementById("authorChange");
+            let changeBookStatus = document.getElementById("changeBookStatus");
+
 
             addBook.addEventListener("click", function() {
                 ajaxAdd.onreadystatechange = function() {
@@ -48,27 +55,27 @@
                 ajaxAdd.send();
             });
 
-            let y=0;
+            let y = 0;
             //KOLLA LISTAN - TWEAK NEEDED!!
             viewBooks.addEventListener("click", function(e) {
-//                addLi.innerHTML = "";
+                //                addLi.innerHTML = "";
                 ajaxAdd.onreadystatechange = function() {
                     if (ajaxAdd.readyState === 4) {
                         let json = JSON.parse(ajaxAdd.responseText);
                         console.log(json);
 
-                      if(json.data.length !== undefined){
-                        for(let i=0; i< json.data.length; i++){
-                          let addLi = document.createElement("li");
+                        if (json.data.length !== undefined) {
+                            for (let i = 0; i < json.data.length; i++) {
+                                let addLi = document.createElement("li");
 
-                            addLi.innerHTML += `Title: <strong>${json.data[y].title}</strong><br>`;
-                            addLi.innerHTML += `Author: <strong>${json.data[y].author}</strong><br>`;
-                            addLi.innerHTML += `Book ID: <strong>${json.data[y].id}</strong><br>`;
-                            addLi.innerHTML += `Last Update: <strong>${json.data[y].updated}</strong><br><br>`;
-                            ulList[0].appendChild(addLi);
-                            y++
+                                addLi.innerHTML += `Title: <strong>${json.data[y].title}</strong><br>`;
+                                addLi.innerHTML += `Author: <strong>${json.data[y].author}</strong><br>`;
+                                addLi.innerHTML += `Book ID: <strong>${json.data[y].id}</strong><br>`;
+                                addLi.innerHTML += `Last Update: <strong>${json.data[y].updated}</strong><br><br>`;
+                                ulList[0].appendChild(addLi);
+                                y++
 
-                          }
+                            }
                         }
 
                     }
@@ -76,6 +83,27 @@
                 ajaxAdd.open("get", `https://www.forverkliga.se/JavaScript/api/crud.php?op=select&key=${inputKey.value}`)
                 ajaxAdd.send()
             });
+
+
+            //////////////////////////////CHANGEBOOK////////////////////////////////////
+
+            changeBook.addEventListener("click", function(event) {
+                ajaxAdd.onreadystatechange = function() {
+                    if (ajaxAdd.readyState === 4) {
+                        let json = JSON.parse(ajaxAdd.responseText);
+                        console.log(json);
+                        if (json.message === undefined) {
+                            changeBookStatus.innerHTML = `Status: ${json.status}`;
+                        } else {
+                            changeBookStatus.innerHTML = `Status: ${json.status} <br> Message: ${json.message}`;
+                        }
+                    }
+                }
+                ajaxAdd.open("get", `https://www.forverkliga.se/JavaScript/api/crud.php?op=update&key=${inputKey.value}&id=${bookId.value}&title=${titleChange.value}&author=${authorChange.value}`);
+                ajaxAdd.send();
+            });
+
+            /////////////////////////////////////////////////////////////////
 
 
             btn.addEventListener("click", function(e) { // KLICKA PÅ KNAPP GET KEY
@@ -137,8 +165,9 @@
     <button id="viewBooks">View Books</button>
     <button id="changeBook">Change Book</button><br>
     <input type="text" placeholder="Id" name="" id="id"> <br>
-    <input type="text" placeholder="Title" name="" id="title"><br>
-    <input type="text" placeholder="Author" name="" id="author"><br>
+    <input type="text" placeholder="Title" name="" id="titleChange"><br>
+    <input type="text" placeholder="Author" name="" id="authorChange"><br>
+    <div id="changeBookStatus"></div>
 
     <button id="changeBook">Delete Book</button><br>
     <input type="text" placeholder="Delete Id" id="deleteId">
