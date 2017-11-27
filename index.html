@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>LAB 4 Robin o Jonathan</title>
     <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro" rel="stylesheet">
+    <script src="externalApi.js" charset="utf-8"></script>
 
     <script>
         window.addEventListener("load", function() {
@@ -173,6 +174,8 @@
                         let json = JSON.parse(ajaxAdd.responseText);
                         console.log(json)
                         let idVal = Number(deleteId.value)
+
+                        if()
                         for (let i = 0; i < objBooks.data.length; i++) {
                             if (objBooks.data[i].id === idVal) {
                                 let id = document.getElementById(objBooks.data[i].title);
