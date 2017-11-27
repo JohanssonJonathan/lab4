@@ -171,6 +171,7 @@
                 ajaxAdd.onreadystatechange = function() {
                     if (ajaxAdd.readyState === 4) {
                         let json = JSON.parse(ajaxAdd.responseText);
+                        console.log(json)
                         let idVal = Number(deleteId.value)
                         for (let i = 0; i < objBooks.data.length; i++) {
                             if (objBooks.data[i].id === idVal) {
@@ -178,10 +179,11 @@
                                 if(id !== null)
                                 id.remove()
                                 //  console.log(deleteId.value)
-                                if (id !== null)
+                                if (id !== null){
                                     id.remove();
                                 console.log(objBooks.data[i].title)
                                 delBookStatus.innerHTML = `Status: <strong>Success!</strong>`
+                              }
                             } else {
                                 failDelCounter = failDelCounter + 1;
                                 delBookStatus.innerHTML = `Fail counter: <strong>${failDelCounter}</strong>`;
