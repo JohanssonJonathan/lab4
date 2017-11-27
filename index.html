@@ -6,20 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>LAB 4 Robin o Jonathan</title>
-    <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro" rel="stylesheet">
 
     <script>
         window.addEventListener("load", function() {
 
-            let ajaxKey = new XMLHttpRequest(); // NEW AJAX REQUEST
-
+            let failViewCounter = 0;
+            let failAddCounter = 0;
+            let failDelCounter = 0;
             let btn = document.getElementById("key"); //HÄMTA GET KEY KNAPPEN
 
             let output = document.getElementById("output")
             let inputKey = document.getElementById("keyin");
 
             //Lägga till bok
-            let ajaxAdd = new XMLHttpRequest(); // NEW AJAX REQUEST (EJ NÖDVÄNDIG)
+            let ajaxAdd = new XMLHttpRequest(); // NEW AJAX REQUEST 
             let addBook = document.getElementById("addBook");
             let title = document.getElementById("title");
             let author = document.getElementById("author");
@@ -33,12 +34,11 @@
             //Ta bort Book
             let deleteBook = document.getElementById("deleteBook");
             let deleteId = document.getElementById("deleteId");
+            let delBookStatus = document.getElementById("delBookStatus");
 
             //Kolla på böcker
             let viewBooks = document.getElementById("viewBooks");
             let ulList = document.getElementsByTagName("ul");
-
-
 
             let objBooks = ""
 
@@ -46,14 +46,22 @@
                 ajaxAdd.onreadystatechange = function() {
                     if (ajaxAdd.readyState === 4) {
                         let json = JSON.parse(ajaxAdd.responseText);
-                        console.log(json)
-                        console.log(ajaxAdd.id);
-                        console.log(ajaxAdd.status);
-                        console.log(inputKey.value)
-                        console.log(title.value)
-                        console.log(author.value)
-                        addBookStatus.innerHTML = `Status: <strong>${json.status}</strong><br>
+                        
+                        if (json.status === "success") {
+                            //                        console.log(json)
+                            //                        console.log(ajaxAdd.id);
+                            //                        console.log(ajaxAdd.status);
+                            //                        console.log(inputKey.value)
+                            //                        console.log(title.value)
+                            //                        console.log(author.value)
+                            addBookStatus.innerHTML = `Status: <strong>${json.status}</strong><br>
                     Book ID: <strong>${json.id}</strong>`
+                        } else {
+                            failAddCounter = failAddCounter + 1;
+                            addBookStatus.innerHTML = `Status: <strong>${json.status}</strong><br>
+                    Fail counter: <strong>${failAddCounter}</strong>`
+                            
+                        }
                     }
                 };
                 ajaxAdd.open("get", `https://www.forverkliga.se/JavaScript/api/crud.php?op=insert&key=${inputKey.value}&title=${title.value}&author=${author.value}`)
@@ -62,22 +70,15 @@
 
 
             //KOLLA LISTAN - TWEAK NEEDED!!
-
             viewBooks.addEventListener("click", function(e) {
-
                 ajaxAdd.onreadystatechange = function() {
                     ulList[0].innerHTML = "";
                     if (ajaxAdd.readyState === 4) {
                         let json = JSON.parse(ajaxAdd.responseText);
-
                         objBooks = json;
-
-
                         if (json.data !== undefined) {
                             for (let i = 0; i < json.data.length; i++) {
-
                                 let addLi = document.createElement("li");
-
                                 addLi.innerHTML += `Title: <strong>${json.data[i].title}</strong><br>`;
                                 addLi.innerHTML += `Author: <strong>${json.data[i].author}</strong><br>`;
                                 addLi.innerHTML += `Book ID: <strong>${json.data[i].id}</strong><br>`;
@@ -85,11 +86,12 @@
                                 addLi.setAttribute("id", json.data[i].title)
                                 ulList[0].appendChild(addLi);
                             }
-                        }else{
+                        } else {
+                            failViewCounter = failViewCounter + 1;
                             let addLi = document.createElement("li");
-                             addLi.innerHTML += `ERROR, TRY AGAIN!`;
-                            ulList[0].appendChild(addLi);
-                        }
+                            addLi.innerHTML += `ERROR, TRY AGAIN! <br> Fail counter: <strong>${failViewCounter}</strong>`;
+                            ulList[0].appendChild(addLi);   
+                        }   
                     }
                 }
                 ajaxAdd.open("get", `https://www.forverkliga.se/JavaScript/api/crud.php?op=select&key=${inputKey.value}`)
@@ -106,13 +108,10 @@
                         let json = JSON.parse(ajaxAdd.responseText);
                         if (json.message === undefined) {
                             changeBookStatus.innerHTML = `Status: <strong>${json.status}</strong><br> Message: <strong>It worked!</strong>`;
-                        } else {
+                        } else{
                             changeBookStatus.innerHTML = `Status: <strong>${json.status}</strong> <br> Message: <strong>${json.message}</strong>`;
-                        }
+                        }   
                     }
-
-
-
                 }
                 ajaxAdd.open("get", `https://www.forverkliga.se/JavaScript/api/crud.php?op=update&key=${inputKey.value}&id=${bookId.value}&title=${titleChange.value}&author=${authorChange.value}`);
                 ajaxAdd.send();
@@ -124,47 +123,39 @@
 
 
             btn.addEventListener("click", function(e) { // KLICKA PÅ KNAPP GET KEY
-                ajaxKey.onreadystatechange = function() {
-                    if (ajaxKey.readyState === 4) {
-                        let json = JSON.parse(ajaxKey.responseText);
+                ajaxAdd.onreadystatechange = function() {
+                    if (ajaxAdd.readyState === 4) {
+                        let json = JSON.parse(ajaxAdd.responseText);
                         inputKey.value = json.key
                     }
                 }
-                ajaxKey.open("get", "https://www.forverkliga.se/JavaScript/api/crud.php?requestKey")
-                ajaxKey.send()
+                ajaxAdd.open("get", "https://www.forverkliga.se/JavaScript/api/crud.php?requestKey")
+                ajaxAdd.send()
             });
 
             // DELETE Book
             deleteBook.addEventListener("click", function(event) {
-
-
-                ajaxKey.onreadystatechange = function() {
-
-                    if (ajaxKey.readyState === 4) {
-                        let json = JSON.parse(ajaxKey.responseText);
-
+                ajaxAdd.onreadystatechange = function() {
+                    if (ajaxAdd.readyState === 4) {
+                        let json = JSON.parse(ajaxAdd.responseText);
                         //console.log("Delete id value "+deleteId.value);
                         let idVal = Number(deleteId.value)
-
                         for (let i = 0; i < objBooks.data.length; i++) {
-
                             if (objBooks.data[i].id === idVal) {
                                 let id = document.getElementById(objBooks.data[i].title);
                                 id.remove()
                                 console.log(objBooks.data[i].title)
-
-                                //  console.log(deleteId.value)
+                                delBookStatus.innerHTML = `Status: <strong>Success!</strong>`
+                            }else{
+                            failDelCounter = failDelCounter + 1;
+                            delBookStatus.innerHTML = `Fail counter: <strong>${failDelCounter}</strong>`
+                                }
                             }
                         }
-
-                        //   for(let i=0; i< json.data.length; i++ )
-                        //   console.log(json.data[i].id)
                     }
-                }
-
-
-                ajaxKey.open("get", "https://www.forverkliga.se/JavaScript/api/crud.php?op=delete&key=" + inputKey.value + "&id=" + deleteId.value)
-                ajaxKey.send()
+                
+                ajaxAdd.open("get", "https://www.forverkliga.se/JavaScript/api/crud.php?op=delete&key=" + inputKey.value + "&id=" + deleteId.value)
+                ajaxAdd.send()
             });
 
         })
@@ -187,14 +178,14 @@
 
         input {
             padding: 5px;
-font-family: 'Anonymous Pro', monospace;
+            font-family: 'Anonymous Pro', monospace;
             margin: 5px;
         }
 
         ul {
             background: rgb(159, 159, 159);
             width: 300px;
-            height: 200px;
+            height: 500px;
             box-shadow: 2px 2px 5px black;
             overflow: scroll;
             padding: 5px;
@@ -218,17 +209,17 @@ font-family: 'Anonymous Pro', monospace;
     </ul>
 
     <button id="viewBooks">View Books</button><br>
-    
+
     <input type="text" placeholder="Id" name="" id="bookId"> <br>
     <input type="text" placeholder="Title" name="" id="titleChange"><br>
     <input type="text" placeholder="Author" name="" id="authorChange"><br>
     <button id="changeBook">Change Book</button><br>
     <div id="changeBookStatus">Status:<br>Message:</div>
 
-    
-    <input type="text" placeholder="Delete Id" id="deleteId"><br>
-<button id="deleteBook">Delete Book</button><br>
 
+    <input type="text" placeholder="Delete Id" id="deleteId"><br>
+    <button id="deleteBook">Delete Book</button><br>
+<div id="delBookStatus"></div>
 </body>
 
 </html>
