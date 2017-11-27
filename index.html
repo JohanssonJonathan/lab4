@@ -69,12 +69,7 @@
                         let addLi = document.createElement("li");
                         addBookStatus.innerHTML = `Status: <strong>${json.status}</strong><br>
                     Book ID: <strong>${json.id}</strong>`
-
-                    let addLi = document.createElement("li");
-
                   console.log(json)
-
-
                     addLi.innerHTML += `Title: <strong>${title.value}</strong><br>`;
                     addLi.innerHTML += `Author: <strong>${author.value}</strong><br>`;
                     addLi.innerHTML += `Book ID: <strong>${json.id}</strong><br>`;
@@ -168,24 +163,6 @@
 
             // DELETE Book
             deleteBook.addEventListener("click", function(event) {
-
-
-                ajaxKey.onreadystatechange = function() {
-
-                    if (ajaxKey.readyState === 4) {
-                        let json = JSON.parse(ajaxKey.responseText);
-                          console.log(deleteId.value)
-
-                          if(li.length === undefined){
-                            li.length = 1;
-                          }
-                        for(let y=0; y< li.length; y++){
-
-                            if(li[y].className === String(deleteId.value)){
-                              console.log("hej")
-                            }
-                        }
-                        //console.log("Delete id value "+deleteId.value);
                 ajaxAdd.onreadystatechange = function() {
                     if (ajaxAdd.readyState === 4) {
                         let json = JSON.parse(ajaxAdd.responseText);
