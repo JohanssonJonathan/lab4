@@ -60,38 +60,25 @@
                 //2017-11-27 09:58:44
                 let datumet = datum.getFullYear() + "-" + datum.getMonth() + "-" + datum.getDay() + " " +
                     datum.getHours() + ":" + checkMin(datum.getMinutes()) + ":" + datum.getSeconds();
+
                 ajaxAdd.onreadystatechange = function() {
                     if (ajaxAdd.readyState === 4) {
                         let json = JSON.parse(ajaxAdd.responseText);
-                        //                        console.log(json)
-                        //                        console.log(ajaxAdd.id);
-                        //                        console.log(ajaxAdd.status);
-                        //                        console.log(inputKey.value)
-                        //                        console.log(title.value)
-                        //                        console.log(author.value)
+                        let addLi = document.createElement("li");
                         addBookStatus.innerHTML = `Status: <strong>${json.status}</strong><br>
                     Book ID: <strong>${json.id}</strong>`
-                        let addLi = document.createElement("li");
-                        console.log(json)
+                        
                         addLi.innerHTML += `Title: <strong>${title.value}</strong><br>`;
                         addLi.innerHTML += `Author: <strong>${author.value}</strong><br>`;
                         addLi.innerHTML += `Book ID: <strong>${json.id}</strong><br>`;
                         addLi.innerHTML += `Last Update: <strong>${datumet}</strong><br><br>`;
+
+                        console.log(json)
                         if (json.status === "success") {
-                            ulList[0].appendChild(addLi)
-                        }
-                        if (json.status === "success") {
-                            //                            console.log(json)
-                            //                            console.log(ajaxAdd.id);
-                            //                            console.log(ajaxAdd.status);
-                            //                            console.log(inputKey.value)
-                            //                            console.log(title.value)
-                            //                            console.log(author.value)
-                            addBookStatus.innerHTML = `Status: <strong>${json.status}</strong><br>
-                    Book ID: <strong>${json.id}</strong>`
+                            ulList[0].appendChild(addLi);
                         } else {
                             failAddCounter = failAddCounter + 1;
-                            addBookStatus.innerHTML = `Status: <strong>${json.status}</strong><br>
+                            addBookStatus.innerHTML = `Status: <strong>${json.status}, try again!</strong><br>
                     Fail counter: <strong>${failAddCounter}</strong>`
                         }
                     }
@@ -119,7 +106,7 @@
                         } else {
                             failViewCounter = failViewCounter + 1;
                             let addLi = document.createElement("li");
-                            addLi.innerHTML += `ERROR, TRY AGAIN! <br> Fail counter: <strong>${failViewCounter}</strong>`;
+                            addLi.innerHTML += `Status: error, try again! <br> Fail counter: <strong>${failViewCounter}</strong>`;
                             ulList[0].appendChild(addLi);
                         }
                     }
@@ -141,7 +128,7 @@
                         } else {
                             changeBookStatus.innerHTML = `Status: <strong>${json.status}</strong> <br> Message: <strong>${json.message}</strong>`;
                             failChangeCounter = failChangeCounter + 1;
-                            changeBookStatus.innerHTML = `Status: <strong>${json.status}</strong> <br>Fail counter: <strong>${failChangeCounter}</strong>`
+                            changeBookStatus.innerHTML = `Status: <strong>${json.status}, try again!</strong> <br>Fail counter: <strong>${failChangeCounter}</strong>`
                         }
                     }
                 }
@@ -167,19 +154,17 @@
                 ajaxAdd.onreadystatechange = function() {
                     if (ajaxAdd.readyState === 4) {
                         let json = JSON.parse(ajaxAdd.responseText);
-                        //console.log("Delete id value "+deleteId.value);
                         let idVal = Number(deleteId.value)
                         for (let i = 0; i < objBooks.data.length; i++) {
                             if (objBooks.data[i].id === idVal) {
                                 let id = document.getElementById(objBooks.data[i].title);
                                 if (id !== null)
                                     id.remove();
-                                //  console.log(deleteId.value)
                                 console.log(objBooks.data[i].title)
                                 delBookStatus.innerHTML = `Status: <strong>Success!</strong>`
                             } else {
                                 failDelCounter = failDelCounter + 1;
-                                delBookStatus.innerHTML = `Fail counter: <strong>${failDelCounter}</strong>`
+                                delBookStatus.innerHTML = `Fail counter: <strong>${failDelCounter}</strong>`;
                             }
                         }
                     }
@@ -189,6 +174,7 @@
             });
 
         })
+
     </script>
 
     <style>
@@ -219,6 +205,7 @@
             overflow: scroll;
             padding: 5px;
         }
+
     </style>
 </head>
 
@@ -247,10 +234,7 @@
 
     <input type="text" placeholder="Delete Id" id="deleteId"><br>
     <button id="deleteBook">Delete Book</button><br>
-
-    <input type="text" placeholder="Delete Id" id="deleteId"><br>
-    <button id="deleteBook">Delete Book</button><br>
-    <div id="delBookStatus"></div>
+    <div id="delBookStatus">Status output: <br></div>
 </body>
 
 </html>
