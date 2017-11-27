@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>LAB 4 Robin o Jonathan</title>
-    <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro" rel="stylesheet">
 
     <script>
         window.addEventListener("load", function() {
@@ -42,18 +42,48 @@
 
             let objBooks = ""
 
+            function checkMin(d){
+              if(d<10){
+                return "0"+d
+              }else{
+                return d
+              }
+            }
+
+
+
+
             addBook.addEventListener("click", function() {
+
+              let datum = new Date();
+  //2017-11-27 09:58:44
+              let datumet = datum.getFullYear() + "-" + datum.getMonth() +"-"+ datum.getDay()+ " "+
+               datum.getHours()+":" + checkMin(datum.getMinutes()) + ":" + datum.getSeconds();
                 ajaxAdd.onreadystatechange = function() {
                     if (ajaxAdd.readyState === 4) {
                         let json = JSON.parse(ajaxAdd.responseText);
-                        console.log(json)
+                        /*console.log(json)
                         console.log(ajaxAdd.id);
                         console.log(ajaxAdd.status);
                         console.log(inputKey.value)
                         console.log(title.value)
-                        console.log(author.value)
+                        console.log(author.value)*/
                         addBookStatus.innerHTML = `Status: <strong>${json.status}</strong><br>
                     Book ID: <strong>${json.id}</strong>`
+
+                    let addLi = document.createElement("li");
+
+                  console.log(json)
+
+
+                    addLi.innerHTML += `Title: <strong>${title.value}</strong><br>`;
+                    addLi.innerHTML += `Author: <strong>${author.value}</strong><br>`;
+                    addLi.innerHTML += `Book ID: <strong>${json.id}</strong><br>`;
+                   addLi.innerHTML += `Last Update: <strong>${datumet}</strong><br><br>`;
+
+                    if(json.status ==="success"){
+                    ulList[0].appendChild(addLi)
+                  }
                     }
                 };
                 ajaxAdd.open("get", `https://www.forverkliga.se/JavaScript/api/crud.php?op=insert&key=${inputKey.value}&title=${title.value}&author=${author.value}`)
@@ -77,7 +107,7 @@
                             for (let i = 0; i < json.data.length; i++) {
 
                                 let addLi = document.createElement("li");
-
+                                update = json.data.length;
                                 addLi.innerHTML += `Title: <strong>${json.data[i].title}</strong><br>`;
                                 addLi.innerHTML += `Author: <strong>${json.data[i].author}</strong><br>`;
                                 addLi.innerHTML += `Book ID: <strong>${json.data[i].id}</strong><br>`;
@@ -150,8 +180,8 @@
 
                             if (objBooks.data[i].id === idVal) {
                                 let id = document.getElementById(objBooks.data[i].title);
+                                if(id !== null)
                                 id.remove()
-                                console.log(objBooks.data[i].title)
 
                                 //  console.log(deleteId.value)
                             }
@@ -218,14 +248,14 @@ font-family: 'Anonymous Pro', monospace;
     </ul>
 
     <button id="viewBooks">View Books</button><br>
-    
+
     <input type="text" placeholder="Id" name="" id="bookId"> <br>
     <input type="text" placeholder="Title" name="" id="titleChange"><br>
     <input type="text" placeholder="Author" name="" id="authorChange"><br>
     <button id="changeBook">Change Book</button><br>
     <div id="changeBookStatus">Status:<br>Message:</div>
 
-    
+
     <input type="text" placeholder="Delete Id" id="deleteId"><br>
 <button id="deleteBook">Delete Book</button><br>
 
