@@ -120,7 +120,25 @@
 
             //////////////////////////////CHANGEBOOK////////////////////////////////////
 
-            changeBook.addEventListener("click", function(event) {
+            titleChange.addEventListener("change", function(event) {
+
+                ajaxAdd.onreadystatechange = function() {
+                    if (ajaxAdd.readyState === 4) {
+                        let json = JSON.parse(ajaxAdd.responseText);
+                        if (json.message === undefined) {
+                            changeBookStatus.innerHTML = `Status: <strong>${json.status}</strong><br> Message: <strong>It worked!</strong>`;
+                        } else {
+                            changeBookStatus.innerHTML = `Status: <strong>${json.status}</strong> <br> Message: <strong>${json.message}</strong>`;
+                            failChangeCounter = failChangeCounter + 1;
+                            changeBookStatus.innerHTML = `Status: <strong>${json.status}, try again!</strong> <br>Fail counter: <strong>${failChangeCounter}</strong>`
+                        }
+                    }
+                }
+                ajaxAdd.open("get", `https://www.forverkliga.se/JavaScript/api/crud.php?op=update&key=${inputKey.value}&id=${bookId.value}&title=${titleChange.value}&author=${authorChange.value}`);
+                ajaxAdd.send();
+            })
+
+            authorChange.addEventListener("change", function(event) {
 
                 ajaxAdd.onreadystatechange = function() {
                     if (ajaxAdd.readyState === 4) {
@@ -153,10 +171,7 @@
 
             // DELETE Book
             deleteBook.addEventListener("click", function(event) {
-
-
-
-                //console.log("Delete id value "+deleteId.value);
+            //console.log("Delete id value "+deleteId.value);
                 ajaxAdd.onreadystatechange = function() {
                     if (ajaxAdd.readyState === 4) {
                         let json = JSON.parse(ajaxAdd.responseText);
@@ -188,6 +203,9 @@
     </script>
 
     <style>
+        #key, #keyin {
+            display: none;
+        }
         body {
             font-family: 'Anonymous Pro', monospace;
         }
@@ -242,7 +260,6 @@
     <input type="text" placeholder="Id" name="" id="bookId"> <br>
     <input type="text" placeholder="Title" name="" id="titleChange"><br>
     <input type="text" placeholder="Author" name="" id="authorChange"><br>
-    <button id="changeBook">Change Book</button><br>
     <div id="changeBookStatus">Status:<br>Message:</div>
 
 
