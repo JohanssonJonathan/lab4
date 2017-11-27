@@ -71,23 +71,12 @@
                         addBookStatus.innerHTML = `Status: <strong>${json.status}</strong><br>
                     Book ID: <strong>${json.id}</strong>`
 
-                  console.log(json)
-                    addLi.innerHTML += `Title: <strong>${title.value}</strong><br>`;
-                    addLi.innerHTML += `Author: <strong>${author.value}</strong><br>`;
-                    addLi.innerHTML += `Book ID: <strong>${json.id}</strong><br>`;
-                   addLi.innerHTML += `Last Update: <strong>${datumet}</strong><br><br>`;
-                    addLi.setAttribute("id", title.value)
-
-                    if(json.status ==="success"){
-                    ulList[0].appendChild(addLi)
-                  }
-
+                        console.log(json)
                         addLi.innerHTML += `Title: <strong>${title.value}</strong><br>`;
                         addLi.innerHTML += `Author: <strong>${author.value}</strong><br>`;
                         addLi.innerHTML += `Book ID: <strong>${json.id}</strong><br>`;
                         addLi.innerHTML += `Last Update: <strong>${datumet}</strong><br><br>`;
-
-                        console.log(json)
+                        addLi.setAttribute("id", title.value)
                         if (json.status === "success") {
                             ulList[0].appendChild(addLi);
                         } else {
@@ -168,25 +157,23 @@
 
 
 
-                        //console.log("Delete id value "+deleteId.value);
+                //console.log("Delete id value "+deleteId.value);
                 ajaxAdd.onreadystatechange = function() {
                     if (ajaxAdd.readyState === 4) {
                         let json = JSON.parse(ajaxAdd.responseText);
                         console.log(json)
                         let idVal = Number(deleteId.value)
-
-                        if()
                         for (let i = 0; i < objBooks.data.length; i++) {
                             if (objBooks.data[i].id === idVal) {
                                 let id = document.getElementById(objBooks.data[i].title);
-                                if(id !== null)
-                                id.remove()
+                                if (id !== null)
+                                    id.remove()
                                 //  console.log(deleteId.value)
-                                if (id !== null){
+                                if (id !== null) {
                                     id.remove();
-                                console.log(objBooks.data[i].title)
-                                delBookStatus.innerHTML = `Status: <strong>Success!</strong>`
-                              }
+                                    console.log(objBooks.data[i].title)
+                                    delBookStatus.innerHTML = `Status: <strong>Success!</strong>`
+                                }
                             } else {
                                 failDelCounter = failDelCounter + 1;
                                 delBookStatus.innerHTML = `Fail counter: <strong>${failDelCounter}</strong>`;
@@ -243,6 +230,9 @@
 
     <button id="addBook">Add Book</button>
     <div id="addBookStatus">Status: <br>Book ID:</div>
+    
+        <input type="text" placeholder="Search after a book" name="" id="searchBook"><br>
+    <button id="searchBookBtn">Search Book!</button>
 
     <ul>
     </ul>
@@ -259,6 +249,13 @@
     <input type="text" placeholder="Delete Id" id="deleteId"><br>
     <button id="deleteBook">Delete Book</button><br>
     <div id="delBookStatus">Status output: <br></div>
+
+    <br>
+
+<!--
+    <ul>
+    </ul>
+-->
 </body>
 
 </html>
