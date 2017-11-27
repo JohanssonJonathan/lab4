@@ -38,7 +38,7 @@
             let viewBooks = document.getElementById("viewBooks");
             let ulList = document.getElementsByTagName("ul");
 
-
+            let li = document.getElementsByTagName("li");
 
             let objBooks = ""
 
@@ -80,6 +80,7 @@
                     addLi.innerHTML += `Author: <strong>${author.value}</strong><br>`;
                     addLi.innerHTML += `Book ID: <strong>${json.id}</strong><br>`;
                    addLi.innerHTML += `Last Update: <strong>${datumet}</strong><br><br>`;
+                    addLi.setAttribute("id", title.value)
 
                     if(json.status ==="success"){
                     ulList[0].appendChild(addLi)
@@ -110,7 +111,7 @@
                                 update = json.data.length;
                                 addLi.innerHTML += `Title: <strong>${json.data[i].title}</strong><br>`;
                                 addLi.innerHTML += `Author: <strong>${json.data[i].author}</strong><br>`;
-                                addLi.innerHTML += `Book ID: <strong>${json.data[i].id}</strong><br>`;
+                                addLi.innerHTML += `Book ID: <strong class="idvalue">${json.data[i].id}</strong><br>`;
                                 addLi.innerHTML += `Last Update: <strong>${json.data[i].updated}</strong><br><br>`;
                                 addLi.setAttribute("id", json.data[i].title)
                                 ulList[0].appendChild(addLi);
@@ -172,7 +173,17 @@
 
                     if (ajaxKey.readyState === 4) {
                         let json = JSON.parse(ajaxKey.responseText);
+                          console.log(deleteId.value)
 
+                          if(li.length === undefined){
+                            li.length = 1;
+                          }
+                        for(let y=0; y< li.length; y++){
+
+                            if(li[y].className === String(deleteId.value)){
+                              console.log("hej")
+                            }
+                        }
                         //console.log("Delete id value "+deleteId.value);
                         let idVal = Number(deleteId.value)
 
@@ -182,7 +193,6 @@
                                 let id = document.getElementById(objBooks.data[i].title);
                                 if(id !== null)
                                 id.remove()
-
                                 //  console.log(deleteId.value)
                             }
                         }
