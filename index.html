@@ -81,12 +81,12 @@
                             ulList[0].appendChild(addLi)
                         }
                         if (json.status === "success") {
-//                            console.log(json)
-//                            console.log(ajaxAdd.id);
-//                            console.log(ajaxAdd.status);
-//                            console.log(inputKey.value)
-//                            console.log(title.value)
-//                            console.log(author.value)
+                            //                            console.log(json)
+                            //                            console.log(ajaxAdd.id);
+                            //                            console.log(ajaxAdd.status);
+                            //                            console.log(inputKey.value)
+                            //                            console.log(title.value)
+                            //                            console.log(author.value)
                             addBookStatus.innerHTML = `Status: <strong>${json.status}</strong><br>
                     Book ID: <strong>${json.id}</strong>`
                         } else {
@@ -108,7 +108,7 @@
                         objBooks = json;
                         if (json.data !== undefined) {
                             for (let i = 0; i < json.data.length; i++) {
-                                let addLi = document.createElement("li"); 
+                                let addLi = document.createElement("li");
                                 addLi.innerHTML += `Title: <strong>${json.data[i].title}</strong><br>`;
                                 addLi.innerHTML += `Author: <strong>${json.data[i].author}</strong><br>`;
                                 addLi.innerHTML += `Book ID: <strong>${json.data[i].id}</strong><br>`;
@@ -140,8 +140,8 @@
                             changeBookStatus.innerHTML = `Status: <strong>${json.status}</strong><br> Message: <strong>It worked!</strong>`;
                         } else {
                             changeBookStatus.innerHTML = `Status: <strong>${json.status}</strong> <br> Message: <strong>${json.message}</strong>`;
-                                failChangeCounter = failChangeCounter + 1;
-                                changeBookStatus.innerHTML = `Status: <strong>${json.status}</strong> <br>Fail counter: <strong>${failChangeCounter}</strong>`
+                            failChangeCounter = failChangeCounter + 1;
+                            changeBookStatus.innerHTML = `Status: <strong>${json.status}</strong> <br>Fail counter: <strong>${failChangeCounter}</strong>`
                         }
                     }
                 }
@@ -174,8 +174,8 @@
                                 let id = document.getElementById(objBooks.data[i].title);
                                 if (id !== null)
                                     id.remove();
-                                    //  console.log(deleteId.value)
-                                    console.log(objBooks.data[i].title)
+                                //  console.log(deleteId.value)
+                                console.log(objBooks.data[i].title)
                                 delBookStatus.innerHTML = `Status: <strong>Success!</strong>`
                             } else {
                                 failDelCounter = failDelCounter + 1;
@@ -189,7 +189,6 @@
             });
 
         })
-
     </script>
 
     <style>
@@ -220,7 +219,6 @@
             overflow: scroll;
             padding: 5px;
         }
-
     </style>
 </head>
 
@@ -247,12 +245,12 @@
     <div id="changeBookStatus">Status:<br>Message:</div>
 
 
-       <input type="text" placeholder="Delete Id" id="deleteId"><br>
-        <button id="deleteBook">Delete Book</button><br>
+    <input type="text" placeholder="Delete Id" id="deleteId"><br>
+    <button id="deleteBook">Delete Book</button><br>
 
-        <input type="text" placeholder="Delete Id" id="deleteId"><br>
-        <button id="deleteBook">Delete Book</button><br>
-        <div id="delBookStatus"></div>
+    <input type="text" placeholder="Delete Id" id="deleteId"><br>
+    <button id="deleteBook">Delete Book</button><br>
+    <div id="delBookStatus"></div>
 </body>
 
 </html>
