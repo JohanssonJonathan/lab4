@@ -9,8 +9,10 @@ window.addEventListener("load", () => {
     let ulList = document.getElementsByTagName("ul");
     let li = document.getElementsByTagName("li");
     let inputKey = document.getElementById("keyin");
-    let addSearchedBook = document.getElementById("addBkn");
 
+    let failAddNewCounter = 0;
+    let addSearchedBook = document.getElementById("addBkn");
+    let addNewBookStatus = document.getElementById("addNewBookStatus");
 
     console.log(inputKey.value)
 
@@ -19,16 +21,22 @@ window.addEventListener("load", () => {
     id = "";
     datum = "";
 
-    addSearchedBook.addEventListener("click", () => {
-        console.log(searchBook.value)
-        ajaxAdd.onreadystatechange = function () {
-            if (ajaxAdd.readyState === 4) {
-                console.log("klaar!")
-            }
-        }
-        ajaxAdd.open("get", `https://www.forverkliga.se/JavaScript/api/crud.php?op=insert&key=${inputKey.value}&title=${name}&author=${author}`)
-        ajaxAdd.send()
-    })
+    addSearchedBook.addEventListener("click", function (event) {
+        fetch(`https://www.forverkliga.se/JavaScript/api/crud.php?op=insert&key=${inputKey.value}&title=${name}&author=${author}`)
+            .then(function (response) {
+                return response.json();
+            }).then(function (json) {
+                console.log(json);
+                if (json.id === undefined) {
+                    failAddNewCounter = failAddNewCounter + 1;
+                    addNewBookStatus.innerHTML = `Status: <strong>${json.status}</strong><br>
+                                    Fail counter: <strong>${failAddNewCounter}</strong>`;
+                } else {
+                    addNewBookStatus.innerHTML = `Status: <strong>${json.status}</strong><br>
+                                    Book ID: <strong>${json.id}</strong>`;
+                }
+            })
+    });
 
     function checkMin(d) {
         if (d < 10)
@@ -38,17 +46,18 @@ window.addEventListener("load", () => {
     }
 
     //////////////////////////////SÖKA EFTER BOK////////////////////////////////////
-    searchBookBtn.addEventListener("click", function (e) {
+
+    searchBookBtn.addEventListener("click", function (event) {
         let datum = new Date();
         //Exempel: 2017-11-27 09:58:44 
         let datumet = `${datum.getFullYear()}-${datum.getMonth()}-${datum.getDay()} ${datum.getHours()}:${checkMin(datum.getMinutes())}:${datum.getSeconds()}`;
 
-        ajaxAdd.onreadystatechange = function () {
-            let addLi = document.createElement("li");
-            ulList[0].innerHTML = "";
-            if (ajaxAdd.readyState === 4) {
-                let json = JSON.parse(ajaxAdd.responseText);
-                //                        console.log(json.answer.books.book);
+        fetch(`http://api.boktipset.se/book/search.cgi?accesskey=3KWiPjmHsjXZChC7YaQvSg&userkey=rZqiGeHZ&format=json&value=${searchBook.value}`)
+            .then(function (response) {
+                return response.json();
+            }).then(function (json) {
+                let addLi = document.createElement("li");
+                console.log(json);
                 name = json.answer.books.book[0].name;
                 author = json.answer.books.book[0].author_name;
                 id = json.answer.books.book[0].id;
@@ -56,9 +65,7 @@ window.addEventListener("load", () => {
                 addLi.innerHTML += `Title: <strong>${json.answer.books.book[0].name}</strong><br>`;
                 addLi.innerHTML += `Author: <strong>${json.answer.books.book[0].author_name}</strong><br>`;
                 ulList[0].appendChild(addLi);
-            }
-        }
-        ajaxAdd.open("get", `http://api.boktipset.se/book/search.cgi?accesskey=3KWiPjmHsjXZChC7YaQvSg&userkey=rZqiGeHZ&format=json&value=${searchBook.value}`)
-        ajaxAdd.send()
+            })
+
     });
 });
