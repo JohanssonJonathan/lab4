@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>LAB 4 Robin o Jonathan</title>
+    <title>LAB 4 Robin och Jonathan</title>
     <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro" rel="stylesheet">
 
     <script>
@@ -36,32 +36,28 @@
             let deleteBook = document.getElementById("deleteBook");
             let deleteId = document.getElementById("deleteId");
             let delBookStatus = document.getElementById("delBookStatus");
-
             //Kolla på böcker
             let viewBooks = document.getElementById("viewBooks");
             let ulList = document.getElementsByTagName("ul");
-
             let li = document.getElementsByTagName("li");
 
             let objBooks = ""
 
             function checkMin(d) {
-                if (d < 10) {
-                    return "0" + d
-                } else {
-                    return d
-                }
-            }
+                if (d < 10)
+                    return "0" + d;
+                else
+                    return d;
+            };
 
 
 
-
+            //////////////////////////////LÄGGGA TILL BOK////////////////////////////////////
             addBook.addEventListener("click", function() {
-
                 let datum = new Date();
-                //2017-11-27 09:58:44
-                let datumet = datum.getFullYear() + "-" + datum.getMonth() + "-" + datum.getDay() + " " +
-                    datum.getHours() + ":" + checkMin(datum.getMinutes()) + ":" + datum.getSeconds();
+                //Exempel: 2017-11-27 09:58:44 
+                let datumet = `${datum.getFullYear()}-${datum.getMonth()}-${datum.getDay()} ${datum.getHours()}:${checkMin(datum.getMinutes())}:${datum.getSeconds()}`;
+
 
                 ajaxAdd.onreadystatechange = function() {
                     if (ajaxAdd.readyState === 4) {
@@ -88,7 +84,8 @@
                 ajaxAdd.open("get", `https://www.forverkliga.se/JavaScript/api/crud.php?op=insert&key=${inputKey.value}&title=${title.value}&author=${author.value}`)
                 ajaxAdd.send();
             });
-            //KOLLA LISTAN - TWEAK NEEDED!!
+
+            //////////////////////////////KOLLA BOKLISTAN////////////////////////////////////
             viewBooks.addEventListener("click", function(e) {
                 ajaxAdd.onreadystatechange = function() {
                     ulList[0].innerHTML = "";
@@ -118,10 +115,9 @@
 
             });
 
-            //////////////////////////////CHANGEBOOK////////////////////////////////////
+            //////////////////////////////ÄNDRA I BOK////////////////////////////////////
 
             titleChange.addEventListener("change", function(event) {
-
                 ajaxAdd.onreadystatechange = function() {
                     if (ajaxAdd.readyState === 4) {
                         let json = JSON.parse(ajaxAdd.responseText);
@@ -136,10 +132,9 @@
                 }
                 ajaxAdd.open("get", `https://www.forverkliga.se/JavaScript/api/crud.php?op=update&key=${inputKey.value}&id=${bookId.value}&title=${titleChange.value}&author=${authorChange.value}`);
                 ajaxAdd.send();
-            })
+            });
 
             authorChange.addEventListener("change", function(event) {
-
                 ajaxAdd.onreadystatechange = function() {
                     if (ajaxAdd.readyState === 4) {
                         let json = JSON.parse(ajaxAdd.responseText);
@@ -154,9 +149,9 @@
                 }
                 ajaxAdd.open("get", `https://www.forverkliga.se/JavaScript/api/crud.php?op=update&key=${inputKey.value}&id=${bookId.value}&title=${titleChange.value}&author=${authorChange.value}`);
                 ajaxAdd.send();
-            })
+            });
 
-            /////////////////////////////////////////////////////////////////
+            //////////////////////////////HÄMTA NYCKEL////////////////////////////////////
 
             btn.addEventListener("click", function(e) { // KLICKA PÅ KNAPP GET KEY
                 ajaxAdd.onreadystatechange = function() {
@@ -169,9 +164,9 @@
                 ajaxAdd.send()
             });
 
-            // DELETE Book
+            //////////////////////////////TA BORT BOK////////////////////////////////////
             deleteBook.addEventListener("click", function(event) {
-            //console.log("Delete id value "+deleteId.value);
+                //console.log("Delete id value "+deleteId.value);
                 ajaxAdd.onreadystatechange = function() {
                     if (ajaxAdd.readyState === 4) {
                         let json = JSON.parse(ajaxAdd.responseText);
@@ -203,9 +198,11 @@
     </script>
 
     <style>
-        #key, #keyin {
+        #key,
+        #keyin {
             display: none;
         }
+
         body {
             font-family: 'Anonymous Pro', monospace;
         }
@@ -248,7 +245,7 @@
     <button id="addBook">Add Book</button>
     <div id="addBookStatus">Status: <br>Book ID:</div>
 
-        <input type="text" placeholder="Search after a book" name="" id="searchBook"><br>
+    <input type="text" placeholder="Search after a book" name="" id="searchBook"><br>
     <button id="searchBookBtn">Search Book!</button>
     <button id="addBkn">Add searched book</button>
 
@@ -269,11 +266,11 @@
 
     <br>
 
-<!--
+    <!--
     <ul>
     </ul>
 -->
-<script src="externalApi.js" charset="utf-8"></script>
+    <script src="externalApi.js" charset="utf-8"></script>
 
 </body>
 
