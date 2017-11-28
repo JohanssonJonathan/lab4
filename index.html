@@ -10,13 +10,14 @@
 
     <script>
         window.addEventListener("load", function() {
-
+            //Fail counters
             let failViewCounter = 0;
             let failAddCounter = 0;
             let failDelCounter = 0;
             let failChangeCounter = 0;
-            let btn = document.getElementById("key"); //HÄMTA GET KEY KNAPPEN
+            let btn = document.getElementById("key");
 
+            //Nyckel
             let output = document.getElementById("output")
             let inputKey = document.getElementById("keyin");
 
@@ -43,46 +44,44 @@
 
             let objBooks = ""
 
-            function checkMin(d) {
-                if (d < 10)
-                    return "0" + d;
-                else
-                    return d;
-            };
+            //Datum fix
+            //            function checkMin(d) {
+            //                if (d < 10)
+            //                    return "0" + d;
+            //                else
+            //                    return d;
+            //            };
 
-
-
-            //////////////////////////////LÄGGGA TILL BOK////////////////////////////////////
+            //////////////////////////////LÄGGA TILL BOK////////////////////////////////////
             addBook.addEventListener("click", function() {
                 let datum = new Date();
                 //Exempel: 2017-11-27 09:58:44 
-                let datumet = `${datum.getFullYear()}-${datum.getMonth()}-${datum.getDay()} ${datum.getHours()}:${checkMin(datum.getMinutes())}:${datum.getSeconds()}`;
+                let datumet = `${datum.getUTCFullYear()}-${datum.getUTCMonth()+1}-${("0" + datum.getUTCDate()).slice(-2)} ${datum.getUTCHours()+1}:${datum.getUTCMinutes()}:${datum.getUTCSeconds()-1}`;
+                console.log(datumet);
+                //                let datumet = `${datum.getFullYear()}-${datum.getMonth()}-${datum.getDay()} ${datum.getHours()}:${checkMin(datum.getMinutes())}:${datum.getSeconds()}`;
 
-
-                ajaxAdd.onreadystatechange = function() {
-                    if (ajaxAdd.readyState === 4) {
-                        let json = JSON.parse(ajaxAdd.responseText);
+                fetch(`https://www.forverkliga.se/JavaScript/api/crud.php?op=insert&key=${inputKey.value}&title=${title.value}&author=${author.value}`)
+                    .then(function(response) {
+                        return response.json();
+                    })
+                    .then(function(json) {
+                        console.log(json.status);
                         let addLi = document.createElement("li");
-                        addBookStatus.innerHTML = `Status: <strong>${json.status}</strong><br>
-                    Book ID: <strong>${json.id}</strong>`
-
-                        console.log(json)
                         addLi.innerHTML += `Title: <strong>${title.value}</strong><br>`;
                         addLi.innerHTML += `Author: <strong>${author.value}</strong><br>`;
                         addLi.innerHTML += `Book ID: <strong>${json.id}</strong><br>`;
                         addLi.innerHTML += `Last Update: <strong>${datumet}</strong><br><br>`;
                         addLi.setAttribute("id", title.value)
-                        if (json.status === "success") {
-                            ulList[0].appendChild(addLi);
-                        } else {
+                        if (json.status === "error") {
                             failAddCounter = failAddCounter + 1;
                             addBookStatus.innerHTML = `Status: <strong>${json.status}, try again!</strong><br>
                     Fail counter: <strong>${failAddCounter}</strong>`
+                        } else {
+                            addBookStatus.innerHTML = `Status: <strong>${json.status}</strong><br>
+                    Book ID: <strong>${json.id}</strong>`
+                            ulList[0].appendChild(addLi);
                         }
-                    }
-                };
-                ajaxAdd.open("get", `https://www.forverkliga.se/JavaScript/api/crud.php?op=insert&key=${inputKey.value}&title=${title.value}&author=${author.value}`)
-                ajaxAdd.send();
+                    })
             });
 
             //////////////////////////////KOLLA BOKLISTAN////////////////////////////////////
