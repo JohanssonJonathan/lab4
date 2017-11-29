@@ -2,11 +2,10 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>LAB 4 Robin och Jonathan</title>
-    <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro" rel="stylesheet">
 
     <script>
         window.addEventListener("load", function() {
@@ -44,6 +43,10 @@
 
             let objBooks = ""
 
+            let datum = new Date();
+            //Exempel: 2017-11-27 09:58:44 
+            let datumet = `${datum.getUTCFullYear()}-${datum.getUTCMonth()+1}-${("0" + datum.getUTCDate()).slice(-2)} ${datum.getUTCHours()+1}:${datum.getUTCMinutes()}:${datum.getUTCSeconds()-1}`;
+            console.log(datumet);
             //Datum fix
             //            function checkMin(d) {
             //                if (d < 10)
@@ -54,12 +57,6 @@
 
             //////////////////////////////LÄGGA TILL BOK////////////////////////////////////
             addBook.addEventListener("click", function() {
-                let datum = new Date();
-                //Exempel: 2017-11-27 09:58:44 
-                let datumet = `${datum.getUTCFullYear()}-${datum.getUTCMonth()+1}-${("0" + datum.getUTCDate()).slice(-2)} ${datum.getUTCHours()+1}:${datum.getUTCMinutes()}:${datum.getUTCSeconds()-1}`;
-                console.log(datumet);
-                //                let datumet = `${datum.getFullYear()}-${datum.getMonth()}-${datum.getDay()} ${datum.getHours()}:${checkMin(datum.getMinutes())}:${datum.getSeconds()}`;
-
                 fetch(`https://www.forverkliga.se/JavaScript/api/crud.php?op=insert&key=${inputKey.value}&title=${title.value}&author=${author.value}`)
                     .then(function(response) {
                         return response.json();
@@ -104,7 +101,7 @@
                         } else {
                             failViewCounter = failViewCounter + 1;
                             let addLi = document.createElement("li");
-                            addLi.innerHTML += `Status: error, try again! <br> Fail counter: <strong>${failViewCounter}</strong>`;
+                            addLi.innerHTML += `Status: <strong>${json.message}</strong> <br> Fail counter: <strong>${failViewCounter}</strong>`;
                             ulList[0].appendChild(addLi);
                         }
                     }
@@ -184,7 +181,7 @@
                                 }
                             } else {
                                 failDelCounter = failDelCounter + 1;
-                                delBookStatus.innerHTML = `Fail counter: <strong>${failDelCounter}</strong>`;
+                                delBookStatus.innerHTML = `Status: <strong>${json.status}<br> Fail counter: <strong>${failDelCounter}</strong>`;
                             }
                         }
                     }
@@ -203,7 +200,7 @@
         }
 
         body {
-            font-family: 'Anonymous Pro', monospace;
+            font-family: monospace;
         }
 
         button {
@@ -212,12 +209,12 @@
             margin: 10px;
             box-shadow: 5px 5px 10px;
             background: #b95c69;
-            font-family: 'Anonymous Pro', monospace;
+            font-family: monospace;
         }
 
         input {
             padding: 5px;
-            font-family: 'Anonymous Pro', monospace;
+            font-family: monospace;
             margin: 5px;
         }
 
