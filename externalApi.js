@@ -18,10 +18,9 @@ window.addEventListener("load", () => {
     let datum = new Date();
     let datumet = `${datum.getUTCFullYear()}-${datum.getUTCMonth()+1}-${("0" + datum.getUTCDate()).slice(-2)}       ${datum.getUTCHours()+1}:${datum.getUTCMinutes()}:${datum.getUTCSeconds()-1}`;
 
-    name = ""
-    author = "";
-    id = "";
-    datum = "";
+    let name = ""
+    let author = "";
+    let id = "";
 
     //////////////////////////////LÄGGA TILL BOK MED API////////////////////////////////////
     addSearchedBook.addEventListener("click", function (event) {
