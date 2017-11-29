@@ -2,11 +2,10 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>LAB 4 Robin och Jonathan</title>
-    <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro" rel="stylesheet">
 
     <script>
         window.addEventListener("load", function() {
@@ -44,6 +43,10 @@
 
             let objBooks = ""
 
+            let datum = new Date();
+            //Exempel: 2017-11-27 09:58:44
+            let datumet = `${datum.getUTCFullYear()}-${datum.getUTCMonth()+1}-${("0" + datum.getUTCDate()).slice(-2)} ${datum.getUTCHours()+1}:${datum.getUTCMinutes()}:${datum.getUTCSeconds()-1}`;
+            console.log(datumet);
             //Datum fix
             //            function checkMin(d) {
             //                if (d < 10)
@@ -193,22 +196,21 @@
                 ajaxAdd.onreadystatechange = function() {
                     if (ajaxAdd.readyState === 4) {
                         let json = JSON.parse(ajaxAdd.responseText);
-                        console.log(json)
+//                        console.log(json)
                         let idVal = Number(deleteId.value)
                         for (let i = 0; i < objBooks.data.length; i++) {
                             if (objBooks.data[i].id === idVal) {
                                 let id = document.getElementById(objBooks.data[i].title);
-                                if (id !== null)
-                                    id.remove()
-                                //  console.log(deleteId.value)
                                 if (id !== null) {
                                     id.remove();
                                     console.log(objBooks.data[i].title)
                                     delBookStatus.innerHTML = `Status: <strong>Success!</strong>`
                                 }
                             } else {
+                                console.log(json)
                                 failDelCounter = failDelCounter + 1;
-                                delBookStatus.innerHTML = `Fail counter: <strong>${failDelCounter}</strong>`;
+                                delBookStatus.innerHTML = `Status: <strong>${json.status}</strong><br>
+                                                            Message: <strong>${json.message}</strong>`;
                             }
                         }
                     }
@@ -227,7 +229,7 @@
         }
 
         body {
-            font-family: 'Anonymous Pro', monospace;
+            font-family: monospace;
         }
 
         button {
@@ -236,12 +238,12 @@
             margin: 10px;
             box-shadow: 5px 5px 10px;
             background: #b95c69;
-            font-family: 'Anonymous Pro', monospace;
+            font-family: monospace;
         }
 
         input {
             padding: 5px;
-            font-family: 'Anonymous Pro', monospace;
+            font-family: monospace;
             margin: 5px;
         }
 
@@ -286,7 +288,7 @@
 
     <input type="text" placeholder="Delete Id" id="deleteId"><br>
     <button id="deleteBook">Delete Book</button><br>
-    <div id="delBookStatus">Status output: <br></div>
+    <div id="delBookStatus">Status output:</div>
 
     <br>
 
