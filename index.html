@@ -166,22 +166,21 @@
                 ajaxAdd.onreadystatechange = function() {
                     if (ajaxAdd.readyState === 4) {
                         let json = JSON.parse(ajaxAdd.responseText);
-                        console.log(json)
+//                        console.log(json)
                         let idVal = Number(deleteId.value)
                         for (let i = 0; i < objBooks.data.length; i++) {
                             if (objBooks.data[i].id === idVal) {
                                 let id = document.getElementById(objBooks.data[i].title);
-                                if (id !== null)
-                                    id.remove()
-                                //  console.log(deleteId.value)
                                 if (id !== null) {
                                     id.remove();
                                     console.log(objBooks.data[i].title)
                                     delBookStatus.innerHTML = `Status: <strong>Success!</strong>`
                                 }
                             } else {
+                                console.log(json)
                                 failDelCounter = failDelCounter + 1;
-                                delBookStatus.innerHTML = `Status: <strong>${json.status}<br> Fail counter: <strong>${failDelCounter}</strong>`;
+                                delBookStatus.innerHTML = `Status: <strong>${json.status}</strong><br>
+                                                            Message: <strong>${json.message}</strong>`;
                             }
                         }
                     }
@@ -259,7 +258,7 @@
 
     <input type="text" placeholder="Delete Id" id="deleteId"><br>
     <button id="deleteBook">Delete Book</button><br>
-    <div id="delBookStatus">Status output: <br></div>
+    <div id="delBookStatus">Status output:</div>
 
     <br>
 
