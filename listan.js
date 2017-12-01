@@ -8,9 +8,9 @@
 
      ////////////////////////////KOLLA BOKLISTAN////////////////////////////////////
 
-       function resizeIframe(obj) {
-    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
-  }
+     function resizeIframe(obj) {
+         obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+     }
      fetch(`https://www.forverkliga.se/JavaScript/api/crud.php?op=select&key=T8T4f`)
          .then(function (response) {
              ulList[0].innerHTML = "";
@@ -38,9 +38,9 @@
                  }
 
              } else {
-                 
-                 error.innerHTML = `<strong>Ooops, something went wrong!</strong><br> Message: <strong>${json.message}</strong>`
-                 location.reload(); 
+
+                 //                 error.innerHTML = `<strong>Ooops, something went wrong!</strong><br> Message: <strong>${json.message}</strong>`
+                 location.reload();
              }
 
 
@@ -49,19 +49,19 @@
                      if (json.status === "success") {
                          fetch("https://www.forverkliga.se/JavaScript/api/crud.php?op=delete&key=" + "T8T4f" + "&id=" + json.data[i].id)
                              .then(function (response) {
-return response.json();
-                             
-                                 }).then(function(deleteThis){
-                             console.log(deleteThis.status)
-                             if(deleteThis.status === "success"){
-                                 location.reload();
-                             }else{
-                                 buttons[i].innerHTML = `Error....`;
-                             }
-                         })
+                                 return response.json();
+
+                             }).then(function (deleteThis) {
+                                 console.log(deleteThis.status)
+                                 if (deleteThis.status === "success") {
+                                     location.reload();
+                                 } else {
+                                     buttons[i].innerHTML = `Error....`;
+                                 }
+                             })
 
 
-                             
+
                      }
 
                  })
