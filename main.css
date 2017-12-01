@@ -1,7 +1,8 @@
 body {
     padding-top: 5%;
-    margin: 0 auto;
-    background-image: url(books.jpg);
+    margin: 0;
+/*    background-image: url(books.jpg);*/
+    background-color: floralwhite;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center; 
@@ -80,7 +81,31 @@ ul.align-items-start > li {
     color:antiquewhite;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
+
+h1.main {
+    font-size: 4em;
+    text-align: center;
+    position: relative;
+    margin-top:50px;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-weight: bold;
+/*    color:antiquewhite;*/
+}
 #viewBooks {
 	position: absolute;
 	left: 380px;
 }
+
+footer {
+	position:fixed;
+	bottom: 0;
+	width: 100%;
+	height: 60px;
+	line-height: 50px;
+	background-color: #343A40;
+}
+
+main {
+    margin-bottom: 5em;
+}
+
