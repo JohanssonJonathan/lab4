@@ -1,0 +1,86 @@
+body {
+    padding-top: 5%;
+    margin: 0 auto;
+    background-image: url(books.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+    background-size: cover;
+}
+#searchBook {
+    top:20px;
+    margin: auto;
+    position: relative;
+    left:5em;
+}
+#searchBookBtn {
+    top:20px;
+    margin: auto;
+    position: relative;
+    left:5em
+}
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+main > div > ul > li {
+    border: 2px solid black;
+    height: 250px;
+    box-shadow: 2px 2px 5px black;
+    background-color: floralwhite;
+    left:50px;
+}
+
+main > div > ul {
+    
+}
+main > div > ul.bookList > li {
+    border: 2px solid black;
+/*    height: 120px;*/
+/*    width: 100px;*/
+}
+main > div > ul > li > button.btn-outline-success {
+position: absolute;
+top:175px;
+
+}
+main > div > ul > li > button.btn-success {
+position: absolute;
+top:175px;
+
+}
+main > div > ul > li > button.btn-outline-danger {
+	position: absolute;
+	float: right;
+	top: 195px;
+	left: 150px;
+}
+main > div > ul > li > button.btn-danger {
+position: absolute;
+top:175px;
+
+}
+
+main > div > ul > li > img {
+    float: right;
+    position: relative;
+    margin: 5%;
+    border:1px solid black;
+}
+
+ul.align-items-start > li {
+    margin-top:50px;
+}
+#error {
+    text-align: center;
+    position: relative;
+    margin-top:50px;
+    color:antiquewhite;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+#viewBooks {
+	position: absolute;
+	left: 380px;
+}
