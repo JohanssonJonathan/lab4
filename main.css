@@ -69,6 +69,7 @@ main > div > ul > li > img {
     position: relative;
     margin: 5%;
     border:1px solid black;
+    box-shadow: 2px 2px 5px black;
 }
 
 ul.align-items-start > li {
