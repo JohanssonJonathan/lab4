@@ -1,112 +1,142 @@
 body {
     padding-top: 5%;
     margin: 0;
-/*    background-image: url(books.jpg);*/
+    background-image: url(books.jpg);
     background-color: floralwhite;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-position: center; 
+    background-position: center;
     background-size: cover;
 }
-#searchBook {
-    top:20px;
-    margin: auto;
-    position: relative;
-    left:5em;
-}
-#searchBookBtn {
-    top:20px;
-    margin: auto;
-    position: relative;
-    left:5em
-}
-.center-block {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+
+nav a {    
+    font-family: monospace;
 }
 
+.center-block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    #searchBook {
+    top: 50px;
+    margin-top: 75px;
+        margin-bottom: 20px;
+    position: relative;
+    left: 5em;
+    font-family: monospace;
+}
+
+#searchBookBtn {
+    top: 50px;
+    margin-top: 75px;
+    margin-bottom: 20px;
+    position: relative;
+    left: 5.5em;
+    font-family: monospace;
+}
+
+    
+    
 main > div > ul > li {
     border: 2px solid black;
-    height: 250px;
+    height: 300px;
     box-shadow: 2px 2px 5px black;
     background-color: floralwhite;
-    left:50px;
+    left: 50px;
+    font-family: monospace;
 }
 
-main > div > ul {
-    
-}
-main > div > ul.bookList > li {
+
+#bookList > li {
     border: 2px solid black;
-/*    height: 120px;*/
-/*    width: 100px;*/
+    height: 200px;
+    box-shadow: 2px 2px 5px black;
+    background-color: floralwhite;
+    left: 50px;
+    font-family: monospace;
 }
+
 main > div > ul > li > button.btn-outline-success {
-position: absolute;
-top:175px;
-
+    position: absolute;
+    bottom:2%;
+    right:7.1%;
+    font-family: monospace;
 }
+
 main > div > ul > li > button.btn-success {
-position: absolute;
-top:175px;
-
+    position: absolute;
+    bottom:2%;
+    right:7.1%;
+    font-family: monospace;
 }
+
 main > div > ul > li > button.btn-outline-danger {
 	position: absolute;
 	float: right;
-	top: 195px;
-	left: 150px;
+	bottom: 2%;
+	right: 7.1%;
+	font-family: monospace;
 }
-main > div > ul > li > button.btn-danger {
-position: absolute;
-top:175px;
 
+main > div > ul > li > button.btn-danger {
+	position: absolute;
+	float: right;
+	bottom: 2%;
+	right: 7.1%;
+	font-family: monospace;
 }
 
 main > div > ul > li > img {
     float: right;
     position: relative;
     margin: 5%;
-    border:1px solid black;
+    border: 1px solid black;
     box-shadow: 2px 2px 5px black;
 }
 
 ul.align-items-start > li {
-    margin-top:50px;
+    margin-top: 50px;
+    font-family: monospace;
 }
+
 #error {
     text-align: center;
     position: relative;
-    margin-top:50px;
-    color:antiquewhite;
+    margin-top: 50px;
+    color: antiquewhite;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-family: monospace;
 }
 
 h1.main {
     font-size: 4em;
     text-align: center;
     position: relative;
-    margin-top:50px;
+    margin-top: 50px;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    color:white;
     font-weight: bold;
-/*    color:antiquewhite;*/
+    font-family: monospace;
 }
+
 #viewBooks {
-	position: absolute;
-	left: 380px;
+    position: absolute;
+    left: 380px;
 }
 
 footer {
-	position:fixed;
-	bottom: 0;
-	width: 100%;
-	height: 60px;
-	line-height: 50px;
-	background-color: #343A40;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    line-height: 50px;
+    background-color: #343A40;
+    font-family: monospace;
 }
 
 main {
     margin-bottom: 5em;
+    font-family: monospace;
 }
-
