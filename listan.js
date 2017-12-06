@@ -3,7 +3,7 @@
      let ulList = document.getElementsByTagName("ul");
      let deleteBtn = document.getElementsByClassName('delete');
      let div = document.getElementsByTagName("div");
-     let error = document.getElementsByClassName('error');
+     let error = document.getElementsByClassName('error')[0];
      let buttons = document.getElementsByClassName("delete btn btn-outline-danger")
      let titleChange = document.getElementById("titleChange");
      let failcount = document.getElementById("failcount")
@@ -47,6 +47,7 @@
                          let content = ulList[1].appendChild(addLi);
                      }
                  } else {
+
                      location.reload();
                  }
                  console.log(buttons.length)
