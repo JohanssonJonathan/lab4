@@ -40,16 +40,8 @@ window.addEventListener("load", () => {
                     li.innerHTML += `Average Rating: <strong>${json.items[i].volumeInfo.pusblished}</strong><br>`;
                     li.innerHTML += `Rating count: <strong>${json.items[i].volumeInfo.averageRating}</strong><br>`;
                     li.innerHTML += `Publisher: <strong>${json.items[i].volumeInfo.publisher}</strong><br>`;
-                    //                    li.innerHTML += `Published: <strong>${json.items[i].volumeInfo.pusblished}</strong><br>`;
-                    //                                        li.innerHTML += `<a class="btn" data-toggle="collapse" data-target="#detail${idCount}">View details &raquo;</a></p>`
                     ulList[1].appendChild(li);
                 }
-
-
-
-
-
-
                 for (let i = 0; i < clickBtn.length; i++) {
                     clickBtn[i].addEventListener("click", function () {
                         fetch(`https://www.forverkliga.se/JavaScript/api/crud.php?op=insert&key=T8T4f&title=${json.items[i].volumeInfo.title}&author=${json.items[i].volumeInfo.authors}`)
