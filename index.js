@@ -9,6 +9,7 @@ window.addEventListener("load", () => {
     let webpage = "https://www.googleapis.com/books/v1/volumes?q="
     let key = "&key=AIzaSyCsuyWFqAI8X9ijyfo1vCSMUGdEwgMnFLc&";
     let clickBtn = document.getElementsByClassName('book');
+
     //////////////////////////////SÖKA/LÄGGA TILL BOK MED API////////////////////////////////////
     searchBookBtn.addEventListener("click", function (event) {
         ulList[1].innerHTML = "";
