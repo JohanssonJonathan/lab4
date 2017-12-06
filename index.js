@@ -10,6 +10,11 @@ window.addEventListener("load", () => {
     let webpage = "https://www.googleapis.com/books/v1/volumes?q="
     let key = "&key=AIzaSyCsuyWFqAI8X9ijyfo1vCSMUGdEwgMnFLc&";
     let clickBtn = document.getElementsByClassName('book');
+    let fails = document.getElementById("fails")
+
+    let x =0;
+
+    console.log(fails.children[0].innerHTML )
 
     //////////////////////////////SÖKA/LÄGGA TILL BOK MED API////////////////////////////////////
 
@@ -49,6 +54,8 @@ window.addEventListener("load", () => {
               }
               for (let i = 0; i < clickBtn.length; i++) {
                   clickBtn[i].addEventListener("click", function () {
+                      refresh()
+                    function refresh(){
                       fetch(`https://www.forverkliga.se/JavaScript/api/crud.php?op=insert&key=T8T4f&title=${json.items[i].volumeInfo.title}&author=${json.items[i].volumeInfo.authors}`)
                           .then(function (resonse) {
                               return resonse.json();
@@ -57,10 +64,13 @@ window.addEventListener("load", () => {
                                   clickBtn[i].className = "book btn btn-outline-success"
                                   clickBtn[i].innerHTML = `Added!`;
                               } else {
-                                  clickBtn[i].className = "book btn btn-danger"
-                                  clickBtn[i].innerHTML = `Oops! try again`;
+                                x++
+                                fails.children[0].innerHTML = x;
+                                refresh()
+
                               }
                           })
+                      }
                   });
               }
           })

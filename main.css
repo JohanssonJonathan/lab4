@@ -240,6 +240,10 @@ font: 400 11px system-ui;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
+#fails {
+  text-align: center;
+  color:white;
+}
 
 @media  (max-width:600px){
   footer{
