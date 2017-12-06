@@ -7,10 +7,10 @@
      let buttons = document.getElementsByClassName("delete btn btn-outline-danger")
      let titleChange = document.getElementById("titleChange");
      let failcount = document.getElementById("failcount")
+     let x = 0;
+     let key = "T8T4f"
 
-    let key = "T8T4f"
 
-     console.log(buttons.length)
 
      ////////////////////////////KOLLA BOKLISTAN////////////////////////////////////
 
@@ -47,7 +47,7 @@
                          let content = ulList[1].appendChild(addLi);
                      }
                  } else {
-                     error.innerHTML = `<strong>Ooops, something went wrong!</strong><br> Message: <strong>${json.message}</strong>`
+
                      location.reload();
                  }
                  console.log(buttons.length)
@@ -63,6 +63,8 @@
                                          console.log(deleteThis.status)
                                          clicked.target.parentNode.remove();
                                      } else {
+                                          x++
+                                          failcount.innerHTML = x
                                          clicked.target.innerHTML = "Try again!"
                                      }
                                  })
@@ -78,7 +80,8 @@
 
         // ÄNDRA BOK //
 
-        let x = 0;
+
+
 
         titleChange.addEventListener("change",(event)=>{
 
@@ -90,8 +93,9 @@
             .then((response)=>{
                 return response.json()
             }).then((json)=>{
+
               if(json.message === undefined){
-                changeBookStatus.innerHTML = `Status:<strong>${json.status}</strong><br>Message:<strong>It worked!</strong>`;
+                changeBookStatus.innerHTML = `Status:<strong>${json.status}</strong>`;
               }else{
 
                 refresh()
@@ -124,7 +128,7 @@
                         changeBookStatus.innerHTML = `Status: <strong>${json.status}</strong><br> Message: <strong>It worked!</strong>`;
                     } else {
                       refreshAuthor()
-                        changeBookStatus.innerHTML = `Status: <strong>${json.status}</strong> <br> Message: <strong>${json.message}</strong>`;
+                        changeBookStatus.innerHTML = `Status: <strong>${json.status}</strong>`;
                         failChangeCounter = failChangeCounter + 1;
 
                     }

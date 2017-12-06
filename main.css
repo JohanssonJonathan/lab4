@@ -188,8 +188,7 @@ font: 400 11px system-ui;
 
 #bookStatus h5{
   margin:20px;
-  color:white
-=======
+  color:white;
     font-family: monospace;
 }
 
@@ -230,5 +229,17 @@ font: 400 11px system-ui;
 #bookStatus h5 {
     margin: 20px;
     color: white
->>>>>>> aaf4dfb81ef138c49ece0ce72a7a0fa4c4874bb7
+}
+
+
+@media  (max-width:600px){
+  footer{
+    background: red;
+  }
+
+  #bookStatus input
+      {
+    width: 50px;
+    height: 20px;
+  }
 }
