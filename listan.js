@@ -24,7 +24,9 @@
          fetch(`https://www.forverkliga.se/JavaScript/api/crud.php?op=select&key=${key}`)
              .then(function (response) {
                  ulList[1].innerHTML = "";
+                 if(error !== undefined){
                  error.innerHTML = "";
+               }
                  return response.json();
              }, function (failed) {
                  if (counter < 5)
