@@ -5,6 +5,10 @@
      let div = document.getElementsByTagName("div");
      let error = document.getElementById('error');
      let buttons = document.getElementsByClassName("delete btn btn-outline-danger")
+     let titleChange = document.getElementById("titleChange");
+
+    let key = "T8T4f"
+
      console.log(buttons.length)
 
      ////////////////////////////KOLLA BOKLISTAN////////////////////////////////////
@@ -16,7 +20,7 @@
      getPage();
 
      function getPage(counter = 0) {
-         fetch(`https://www.forverkliga.se/JavaScript/api/crud.php?op=select&key=T8T4f`)
+         fetch(`https://www.forverkliga.se/JavaScript/api/crud.php?op=select&key=${key}`)
              .then(function (response) {
                  ulList[1].innerHTML = "";
                  error.innerHTML = "";
@@ -68,5 +72,49 @@
                  }
              })
      }
- })
 
+
+    
+        // ÄNDRA BOK //
+
+        titleChange.addEventListener("change",(event)=>{
+
+            fetch(`https://www.forverkliga.se/JavaScript/api/crud.php?op=update&key=${key}&id=${bookId.value}&title=${titleChange.value}&author=${authorChange.value}`)
+            .then((response)=>{
+                return response.json()
+            }).then((json)=>{
+              if(json.message === undefined){
+                changeBookStatus.innerHTML = `Status:<strong>${json.status}</strong><br>Message:<strong>It worked!</strong>`;
+              }else{
+                changeBookStatus.innerHTML = `Status: <strong>${json.status}</strong><br>Message:<strong>${json.message}</strong>`;
+                failChangeCounter = failChangeCounter +1;
+                changeBookStatus.innerHTML = `Status: <strong>${json.status}, try again!</strong><br>Fail counter: <strong> ${failChangeCounter}</strong>`;
+              }
+            }).catch(()=>{
+              console.log("ERROR!!!")
+            })
+
+        })
+
+        authorChange.addEventListener("change", function(event) {
+
+            fetch(`https://www.forverkliga.se/JavaScript/api/crud.php?op=update&key=${key}&id=${bookId.value}&title=${titleChange.value}&author=${authorChange.value}`)
+                .then((response) => {
+
+                    return response.json()
+                }).then((json) => {
+                    if (json.message === undefined) {
+                        changeBookStatus.innerHTML = `Status: <strong>${json.status}</strong><br> Message: <strong>It worked!</strong>`;
+                    } else {
+                        changeBookStatus.innerHTML = `Status: <strong>${json.status}</strong> <br> Message: <strong>${json.message}</strong>`;
+                        failChangeCounter = failChangeCounter + 1;
+                        changeBookStatus.innerHTML = `Status: <strong>${json.status}, try again!</strong> <br>Fail counter: <strong>${failChangeCounter}</strong>`
+                    }
+                }).catch(function() {
+                    console.log("ERROR!!!")
+                })
+        });
+
+
+
+ })
