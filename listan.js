@@ -56,6 +56,8 @@
                  for (let i = 0; i < buttons.length; i++) {
                      buttons[i].addEventListener("click", function (clicked) {
                          if (json.status === "success") {
+                           remove()
+                           function remove(){
                              fetch("https://www.forverkliga.se/JavaScript/api/crud.php?op=delete&key=" + "T8T4f" + "&id=" + json.data[i].id)
                                  .then(function (response) {
                                      return response.json();
@@ -65,11 +67,13 @@
                                          console.log(deleteThis.status)
                                          clicked.target.parentNode.remove();
                                      } else {
+
                                           x++
                                           failcount.innerHTML = x
-                                         clicked.target.innerHTML = "Try again!"
+                                          remove()
                                      }
                                  })
+                               }
                          }
 
                      })
