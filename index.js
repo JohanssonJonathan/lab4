@@ -29,7 +29,7 @@ window.addEventListener("load", () => {
                     button.setAttribute("id", "addBook" + idCount++);
                     li.setAttribute("id", "detail" + idCount++)
                     if (json.items[i].volumeInfo.readingModes.image === false) {
-                        li.innerHTML += `<img src="./not_sure.jpg" width="128" alt="Nothing to show">`;
+                        li.innerHTML += `<img src="./no_book_for_you.png" width="128" alt="Nothing to show">`;
                     } else {
                         li.innerHTML += `<img src="${json.items[i].volumeInfo.imageLinks.thumbnail} alt="Nothing to show">`;
                     }
