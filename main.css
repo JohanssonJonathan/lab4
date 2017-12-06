@@ -75,16 +75,16 @@ main > div > ul > li > button.btn-success {
 main > div > ul > li > button.btn-outline-danger {
     position: absolute;
     float: right;
-    bottom: 2%;
-    right: 7.1%;
+    bottom: 5%;
+    right: 7%;
     font-family: monospace;
 }
 
 main > div > ul > li > button.btn-danger {
     position: absolute;
     float: right;
-    bottom: 2%;
-    right: 7.1%;
+    bottom: 5%;
+    right: 7%;
     font-family: monospace;
 }
 
@@ -223,11 +223,13 @@ font: 400 11px system-ui;
     text-align: none;
     margin: none;
     font: 400 11px system-ui;
+    font-family: monospace;
 }
 
 
 #bookStatus h5 {
     margin: 20px;
+<<<<<<< HEAD
     color: white
 }
 
@@ -242,4 +244,8 @@ font: 400 11px system-ui;
     width: 50px;
     height: 20px;
   }
+=======
+    color: white;
+        font-family: monospace;
+>>>>>>> 75adf6e6f54f5c2d00d3302ccdc2e142378fa911
 }
