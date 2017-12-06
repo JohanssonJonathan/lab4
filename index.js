@@ -3,6 +3,7 @@ window.addEventListener("load", () => {
     let searchBookBtn = document.getElementById("searchBookBtn");
     let searchBook = document.getElementById("searchBook");
     let inputKey = document.getElementById("keyin");
+    let error = document.getElementsByClassName("error")[0];
     //Söka efter bok
     let ulList = document.getElementsByTagName("ul");
     let li = document.getElementsByTagName("li");
@@ -18,7 +19,12 @@ window.addEventListener("load", () => {
           .then(function (response) {
               return response.json();
           }).then(function (json) {
-              console.log(json.items[2])
+
+              error.innerHTML =""
+              if(json.items === undefined){
+                  error.innerHTML = "Error there is no book with that name"
+
+              }
               let idCount = 0;
               for (let i = 0; i < json.items.length; i++) {
                   let button = document.createElement("button");

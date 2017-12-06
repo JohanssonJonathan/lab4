@@ -229,8 +229,15 @@ font: 400 11px system-ui;
 
 #bookStatus h5 {
     margin: 20px;
-<<<<<<< HEAD
     color: white
+}
+
+.error {
+    color:white;
+    text-align: center;
+    font-size: 1.5em;
+    font-family: monospace;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
 
@@ -244,8 +251,4 @@ font: 400 11px system-ui;
     width: 50px;
     height: 20px;
   }
-=======
-    color: white;
-        font-family: monospace;
->>>>>>> 75adf6e6f54f5c2d00d3302ccdc2e142378fa911
 }
