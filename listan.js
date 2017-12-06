@@ -6,6 +6,7 @@
      let error = document.getElementById('error');
      let buttons = document.getElementsByClassName("delete btn btn-outline-danger")
      let titleChange = document.getElementById("titleChange");
+     let failcount = document.getElementById("failcount")
 
     let key = "T8T4f"
 
@@ -74,11 +75,17 @@
      }
 
 
-    
+
         // ÄNDRA BOK //
+
+        let x = 0;
 
         titleChange.addEventListener("change",(event)=>{
 
+          refresh()
+          function refresh(){
+            failcount.innerHTML  =x;
+            x++;
             fetch(`https://www.forverkliga.se/JavaScript/api/crud.php?op=update&key=${key}&id=${bookId.value}&title=${titleChange.value}&author=${authorChange.value}`)
             .then((response)=>{
                 return response.json()
@@ -86,18 +93,28 @@
               if(json.message === undefined){
                 changeBookStatus.innerHTML = `Status:<strong>${json.status}</strong><br>Message:<strong>It worked!</strong>`;
               }else{
+
+                refresh()
+
                 changeBookStatus.innerHTML = `Status: <strong>${json.status}</strong><br>Message:<strong>${json.message}</strong>`;
                 failChangeCounter = failChangeCounter +1;
-                changeBookStatus.innerHTML = `Status: <strong>${json.status}, try again!</strong><br>Fail counter: <strong> ${failChangeCounter}</strong>`;
+                failcount.innerHTML = failChangeCounter
+
               }
             }).catch(()=>{
               console.log("ERROR!!!")
             })
+          }
 
         })
 
         authorChange.addEventListener("change", function(event) {
 
+            refreshAuthor()
+            function refreshAuthor(){
+              failcount.innerHTML = x;
+
+              x++
             fetch(`https://www.forverkliga.se/JavaScript/api/crud.php?op=update&key=${key}&id=${bookId.value}&title=${titleChange.value}&author=${authorChange.value}`)
                 .then((response) => {
 
@@ -106,13 +123,15 @@
                     if (json.message === undefined) {
                         changeBookStatus.innerHTML = `Status: <strong>${json.status}</strong><br> Message: <strong>It worked!</strong>`;
                     } else {
+                      refreshAuthor()
                         changeBookStatus.innerHTML = `Status: <strong>${json.status}</strong> <br> Message: <strong>${json.message}</strong>`;
                         failChangeCounter = failChangeCounter + 1;
-                        changeBookStatus.innerHTML = `Status: <strong>${json.status}, try again!</strong> <br>Fail counter: <strong>${failChangeCounter}</strong>`
+
                     }
                 }).catch(function() {
                     console.log("ERROR!!!")
                 })
+              }
         });
 
 

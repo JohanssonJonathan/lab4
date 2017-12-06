@@ -5,7 +5,7 @@ body {
     background-color: floralwhite;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-position: center; 
+    background-position: center;
     background-size: cover;
 }
 #searchBook {
@@ -35,7 +35,7 @@ main > div > ul > li {
 }
 
 main > div > ul {
-    
+
 }
 main > div > ul.bookList > li {
     border: 2px solid black;
@@ -110,3 +110,41 @@ main {
     margin-bottom: 5em;
 }
 
+
+#bookStatus{
+  display: flex;
+  justify-content: center;
+  color:white;
+
+}
+
+#bookStatus input{
+  padding:5px;
+  margin:20px;
+  height: 20px;
+  -webkit-appearance: textfield;
+background-color: white;
+-webkit-rtl-ordering: logical;
+cursor: auto;
+padding: 0;
+border-width: 0;
+border-style: none;
+border-color: none;
+border-image: none;
+text-rendering: none;
+color: none;
+letter-spacing: none;
+word-spacing: none;
+text-transform: none;
+text-indent: 0px;
+text-shadow: none;
+text-align: none;
+margin: none;
+font: 400 11px system-ui;
+}
+
+
+#bookStatus h5{
+  margin:20px;
+  color:white
+}
