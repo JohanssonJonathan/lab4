@@ -41,7 +41,7 @@ nav a {
 
 main > div > ul > li {
     border: 2px solid black;
-    height: 300px;
+    height: auto;
     box-shadow: 2px 2px 5px black;
     background-color: floralwhite;
     left: 50px;
