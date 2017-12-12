@@ -1,95 +1,66 @@
-<!--T8T4f-->
+<!DOCTYPE html>
+
 <html>
 
 <head>
+    <title>Hello, world!</title>
+    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>LAB 4 Robin och Jonathan</title>
-    <script src="javascript.js" charset="utf-8"></script>
-    <script src="externalApi.js" charset="utf-8"></script>
-
-    <script>
-        
-
-    </script>
-
-    <style>
-        #key,
-        #keyin {
-            display: none;
-        }
-
-        body {
-            font-family: monospace;
-        }
-
-        button {
-            padding: 10px;
-            color: white;
-            margin: 10px;
-            box-shadow: 5px 5px 10px;
-            background: #b95c69;
-            font-family: monospace;
-        }
-
-        input {
-            padding: 5px;
-            font-family: monospace;
-            margin: 5px;
-        }
-
-        ul {
-            background: rgb(159, 159, 159);
-            width: 300px;
-            height: 350px;
-            box-shadow: 2px 2px 5px black;
-            overflow: scroll;
-            padding: 5px;
-        }
-
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--JS-->
+    <script src="index.js" charset="utf-8"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="main.css" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 </head>
-
 <body>
-<header>
-    
-</header>
-    <button id="key">Get Key</button>
-    <br>
-    <input type="text" placeholder="Key" name="" value="T8T4f" id="keyin"> <br>
-    <input type="text" placeholder="Title" name="" id="title"><br>
-    <input type="text" placeholder="Author" name="" id="author"><br>
+    <header>
 
-    <button id="addBook">Add Book</button>
-    <div id="addBookStatus">Status: <br>Book ID:</div>
+        <nav class="navbar nav-fill navbar-expand-md navbar-dark bg-dark fixed-top">
+            <a class="navbar-brand" href="./index_new.html">HackerBookstore</a>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="./index.html">Search Book<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./list.html">Booklist</a>
+                    </li>
+                </ul>
 
-    <input type="text" placeholder="Search after a book" name="" id="searchBook"><br>
-    <button id="searchBookBtn">Search Book!</button>
-    <button id="addBkn">Add searched book</button>
-    <div id="addNewBookStatus">Status:<br>Book ID:</div>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10">
+                <div>
+                    <div class="input-group col-md-12">
+                        <input type="text" class="form-control input-lg" placeholder="Search after a book" id="searchBook" />
+                        <button class="btn btn-primary " id="searchBookBtn">Search book!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <main class="container">
 
-    <ul>
-    </ul>
-
-    <button id="viewBooks">View Books</button><br>
-
-    <input type="text" placeholder="Id" name="" id="bookId"> <br>
-    <input type="text" placeholder="Title" name="" id="titleChange"><br>
-    <input type="text" placeholder="Author" name="" id="authorChange"><br>
-    <div id="changeBookStatus">Status:<br>Message:</div>
+        <div class="container">
+            <ul class="row align-items-start collapse-group">
+            </ul>
+        </div>
+    </main>
+<div class="error"></div>
 
 
-    <input type="text" placeholder="Delete Id" id="deleteId"><br>
-    <button id="deleteBook">Delete Book</button><br>
-    <div id="delBookStatus">Status output:</div>
 
-    <br>
 
-    <!--
-    <ul>
-    </ul>
--->
+
+<footer>
+
+    <h5 id="fails">Fails: <span>0</span></h5>
+
+</footer>
+
+
 
 </body>
 
