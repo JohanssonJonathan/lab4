@@ -106,7 +106,7 @@
 
                 refresh()
 
-                changeBookStatus.innerHTML = `Status: <strong>${json.status}</strong><br>Message:<strong>${json.message}</strong>`;
+                changeBookStatus.innerHTML = `Status: <strong>${json.status}</strong>`;
                 failChangeCounter = failChangeCounter +1;
                 failcount.innerHTML = failChangeCounter
 
@@ -131,7 +131,7 @@
                     return response.json()
                 }).then((json) => {
                     if (json.message === undefined) {
-                        changeBookStatus.innerHTML = `Status: <strong>${json.status}</strong><br> Message: <strong>It worked!</strong>`;
+                        changeBookStatus.innerHTML = `Status: <strong>${json.status}</strong>`;
                     } else {
                       refreshAuthor()
                         changeBookStatus.innerHTML = `Status: <strong>${json.status}</strong>`;
