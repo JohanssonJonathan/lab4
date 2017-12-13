@@ -13,6 +13,69 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="main.css" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <style>
+
+    footer{
+      height: 100px;
+      color:white
+    }
+
+    footer #bookStatus{
+      display: flex;
+      justify-content: center;
+      padding:20px;
+    }
+
+    #bookStatus > div:first-child{
+      display:flex;;
+      flex-direction: row;
+    }
+    #bookStatus > div:last-child{
+      display:flex;;
+      flex-direction: row;
+    }
+
+    footer #bookStatus input{
+        width: 100px;
+        height: 20px;
+        margin:20px;
+    }
+
+
+
+    @media  (max-width:600px){
+
+
+      footer{
+        height: 200px;
+          padding: 10px;;
+      }
+
+      footer #bookStatus input{
+          width: 100px;
+          height: 20px;
+          margin:0px;
+      }
+
+      footer #bookStatus{
+        display: flex;
+        justify-content: center;
+          padding:0px;
+      }
+
+      #bookStatus > div:first-child{
+        display: flex;
+        flex-direction: column;
+      }
+
+      #bookStatus > div:last-child{
+
+        margin:20px;
+      }
+
+
+    }
+    </style>
   </head>
   <body>
    <header>
@@ -44,12 +107,16 @@
    </body>
     <footer>
       <div id="bookStatus">
+          <div>
       <input type="text" placeholder="Id" name="" id="bookId"> <br>
       <input type="text" placeholder="Title" name="" id="titleChange"><br>
       <input type="text" placeholder="Author" name="" id="authorChange"><br>
-      <div id="changeBookStatus">Status:<br>Message:</div>
-        <p >Fails:<span id="failcount"></span></p>
+    </div>
 
+      <div>
+      <div id="changeBookStatus">Status:</div>
+        <p >Fails:<span id="failcount"></span></p>
+      </div>
       </div>
 
 
