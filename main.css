@@ -1,6 +1,6 @@
 body {
+    margin: 0 auto;
     padding-top: 5%;
-    margin: 0;
     background-image: url(books.jpg);
     background-color: floralwhite;
     background-repeat: no-repeat;
@@ -24,7 +24,7 @@ nav a {
     margin-top: 75px;
     margin-bottom: 20px;
     position: relative;
-    left: 5em;
+    left: 2em;
     font-family: monospace;
 }
 
@@ -33,7 +33,7 @@ nav a {
     margin-top: 75px;
     margin-bottom: 20px;
     position: relative;
-    left: 5.5em;
+    left: 2.5em;
     font-family: monospace;
 }
 
@@ -41,34 +41,34 @@ nav a {
 
 main > div > ul > li {
     border: 2px solid black;
-    height: auto;
+    height: 350px;
     box-shadow: 2px 2px 5px black;
     background-color: floralwhite;
-    left: 50px;
+/*    left: 50px;*/
     font-family: monospace;
 }
 
 
 #bookList > li {
     border: 2px solid black;
-    height: 200px;
+    height: 250px;
     box-shadow: 2px 2px 5px black;
     background-color: floralwhite;
-    left: 50px;
+/*    left: 50px;*/
     font-family: monospace;
 }
 
 main > div > ul > li > button.btn-outline-success {
     position: absolute;
     bottom: 5%;
-    right: 7%;
+    right: 4%;
     font-family: monospace;
 }
 
 main > div > ul > li > button.btn-success {
     position: absolute;
     bottom: 5%;
-    right: 7%;
+    right: 4%;
     font-family: monospace;
 }
 
@@ -76,7 +76,7 @@ main > div > ul > li > button.btn-outline-danger {
     position: absolute;
     float: right;
     bottom: 5%;
-    right: 7%;
+    right: 4%;
     font-family: monospace;
 }
 
@@ -84,7 +84,7 @@ main > div > ul > li > button.btn-danger {
     position: absolute;
     float: right;
     bottom: 5%;
-    right: 7%;
+    right: 4%;
     font-family: monospace;
 }
 
@@ -138,7 +138,6 @@ footer {
 
 main {
     margin-bottom: 5em;
-<<<<<<< HEAD
 }
 
 footer{
@@ -187,7 +186,7 @@ font: 400 11px system-ui;
 
 
 #bookStatus h5{
-  margin:20px;
+/*  margin:20px;*/
   color:white;
     font-family: monospace;
 }
@@ -228,7 +227,7 @@ font: 400 11px system-ui;
 
 
 #bookStatus h5 {
-    margin: 20px;
+/*    margin: 20px;*/
     color: white
 }
 

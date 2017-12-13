@@ -14,7 +14,7 @@ window.addEventListener("load", () => {
 
     let x =0;
 
-    console.log(fails.children[0].innerHTML )
+    console.log(fails.children[0].innerHTML)
 
     //////////////////////////////SÖKA/LÄGGA TILL BOK MED API////////////////////////////////////
 
@@ -24,31 +24,28 @@ window.addEventListener("load", () => {
           .then(function (response) {
               return response.json();
           }).then(function (json) {
-
               error.innerHTML =""
               if(json.items === undefined){
                   error.innerHTML = "Error there is no book with that name"
-
               }
               let idCount = 0;
               for (let i = 0; i < json.items.length; i++) {
                   let button = document.createElement("button");
                   let li = document.createElement("li");
-                  li.className = "list-inline-item col-lg-5 col-sm-10 col-md-12";
+                  li.className = "list-inline-item col-md-12 col-sm-12 col-md-12 col-xl-5";
                   button.className = "book btn btn-outline-success"
                   button.setAttribute("id", "addBook" + idCount++);
                   li.setAttribute("id", "detail" + idCount++)
                   if (json.items[i].volumeInfo.readingModes.image === false) {
-                      li.innerHTML += `<img src="./no_book_for_you.png" width="128" alt="Nothing to show">`;
+                      li.innerHTML += `<img src="./no_book_for_you.png" width="92" alt="Nothing to show">`;
                   } else {
-                      li.innerHTML += `<img src="${json.items[i].volumeInfo.imageLinks.thumbnail}" alt="Nothing to show">`;
+                      li.innerHTML += `<img width="92" src="${json.items[i].volumeInfo.imageLinks.thumbnail}">`;
                   }
                   button.innerHTML = `Add to list`;
                   li.appendChild(button);
                   li.innerHTML += `Title: <strong>${json.items[i].volumeInfo.title}</strong><br>`;
                   li.innerHTML += `Author: <strong>${json.items[i].volumeInfo.authors}</strong><br>`;
                   li.innerHTML += `Average Rating: <strong>${json.items[i].volumeInfo.pusblished}</strong><br>`;
-                  li.innerHTML += `Rating count: <strong>${json.items[i].volumeInfo.averageRating}</strong><br>`;
                   li.innerHTML += `Publisher: <strong>${json.items[i].volumeInfo.publisher}</strong><br>`;
                   ulList[1].appendChild(li);
               }
@@ -74,11 +71,9 @@ window.addEventListener("load", () => {
                   });
               }
           })
-
     }
 
     searchBookBtn.addEventListener("click", function (event) {
-
         fetchSearch()
     });
 
